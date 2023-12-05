@@ -23,8 +23,6 @@
 
 .grid-container{
   background-color: var(--bg-color);
-  width: 200px;
-  height: 400px;
   display: grid;
   grid-template-columns: repeat(var(--cols), var(--square-size));
   grid-gap: 0;
