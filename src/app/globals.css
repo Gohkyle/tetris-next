@@ -41,6 +41,14 @@
   border-left-color: var(--border-left-color);
 }
 
+.next-block-grid{
+  background-color: var(--bg-color);
+  display: grid;
+  grid-template-columns: repeat(4, var(--square-size));
+  grid-gap: 0;
+  align-self:flex-start;
+}
+
 .color-0 {
   background-color: var(--color-0);
 }
