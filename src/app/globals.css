@@ -5,7 +5,7 @@
   --border-top-color: rgba(255, 255, 255, 0.33);
   --border-right-color: rgba(0, 0, 0, 0.15);
   --border-bottom-color: rgba(0, 0, 0, 0.5);
-
+  
   --color-0: #ffffff;
   --color-1: #ff6600;
   --color-2: #eec900;
@@ -14,39 +14,11 @@
   --color-5: #00ff00;
   --color-6: #66ccff;
   --color-7: #ff0000;
-
+  
   --cols: 10;
   --rows: 20;
   --square-size: 20px;
   --border-width: 4px;
-}
-
-.grid-container{
-  background-color: var(--bg-color);
-  display: grid;
-  grid-template-columns: repeat(var(--cols), var(--square-size));
-  grid-gap: 0;
-  align-self:flex-start;
-}
-
-.grid-square{
-  border-style: solid;
-  box-sizing: border-box;
-  width: var(--square-size);
-  height: var(--square-size);
-  border-width: var(--border-width);
-  border-top-color: var(--border-top-color);
-  border-right-color: var(--border-right-color);
-  border-bottom-color: var(--border-bottom-color);
-  border-left-color: var(--border-left-color);
-}
-
-.next-block-grid{
-  background-color: var(--bg-color);
-  display: grid;
-  grid-template-columns: repeat(4, var(--square-size));
-  grid-gap: 0;
-  align-self:flex-start;
 }
 
 .color-0 {
@@ -79,4 +51,58 @@
 
 .color-7 {
   background-color: var(--color-7);
+}
+
+.app{
+  margin: auto;
+}
+
+.tetris-container{
+  --grid-width: calc((var(--square-size) * var(--cols)));
+  --grid-height: calc((var(--square-size) * var(--rows)));
+
+
+  display: grid;
+  grid-gap: var(--square-size);
+  grid-template-columns: 100px var(--grid-width) 100px;
+  grid-template-rows:100px var(--grid-height) 100px;
+
+  margin:auto;
+}
+
+.grid-container{
+  grid-column: 2/3;
+  grid-row:2/3;
+  background-color: var(--bg-color);
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--square-size));
+  grid-gap: 0;
+  align-self:flex-start;
+}
+
+.grid-square{
+  border-style: solid;
+  box-sizing: border-box;
+  width: var(--square-size);
+  height: var(--square-size);
+  border-width: var(--border-width);
+  border-top-color: var(--border-top-color);
+  border-right-color: var(--border-right-color);
+  border-bottom-color: var(--border-bottom-color);
+  border-left-color: var(--border-left-color);
+}
+
+.next-block-grid-container{
+  grid-column: 3/4;
+  grid-row:2/3;
+  background-color: var(--bg-color);
+  display: grid;
+  grid-template-columns: repeat(4, var(--square-size));
+  grid-gap: 0;
+  align-self:flex-start;
+}
+
+.scoreboard-container{
+  grid-column:1/2;
+  grid-row:2/3;
 }

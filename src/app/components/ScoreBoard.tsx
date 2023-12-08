@@ -1,7 +1,7 @@
 'use client'
 export const ScoreBoard = () => {
     return (
-        <div className="scoreboard">
+        <div className="scoreboard-container">
             <div className= "score-container">
                 SCORE:
             </div>
