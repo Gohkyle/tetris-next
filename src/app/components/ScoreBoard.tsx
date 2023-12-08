@@ -1,13 +1,12 @@
 'use client'
+
+import { Display } from "./Display"
+
 export const ScoreBoard = () => {
     return (
         <div className="scoreboard-container">
-            <div className= "score-container">
-                SCORE:
-            </div>
-            <div className = "level-container">
-                LEVEL:
-            </div>
+            <Display text="score"/>
+            <Display text="level"/>
             <div className= "menu">
                 <button className = "scoreboard-button" onClick={()=>{}}>
                     PLAY
