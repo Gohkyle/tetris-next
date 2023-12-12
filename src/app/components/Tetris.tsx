@@ -9,7 +9,7 @@ export const Tetris = () => {
             <Grid/>
             <NextBlock/>
             <ScoreBoard/>
-            <MessageModal/>
+            <MessageModal title="title" text="text"/>
         </div>
     )
 }
