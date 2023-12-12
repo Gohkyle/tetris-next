@@ -1,12 +1,18 @@
-import styles from './page.module.css'
+"use client"
+
 import { Tetris } from './components/Tetris'
-import { Input } from './components/Input'
+
+interface iProps {
+  key: string
+}
 
 export default function Home() {
+  const handleButtonPress = ({key}: iProps) => {
+    console.log(key)
+}
   return (
-    <main>
+    <main tabIndex={0} onKeyUp={handleButtonPress}>
       <Tetris/>
-      <Input/>
     </main>
   )
 }
