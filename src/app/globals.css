@@ -80,18 +80,6 @@
   align-self:flex-start;
 }
 
-.grid-square{
-  border-style: solid;
-  box-sizing: border-box;
-  width: var(--square-size);
-  height: var(--square-size);
-  border-width: var(--border-width);
-  border-top-color: var(--border-top-color);
-  border-right-color: var(--border-right-color);
-  border-bottom-color: var(--border-bottom-color);
-  border-left-color: var(--border-left-color);
-}
-
 .next-block-grid-container{
   grid-column: 3/4;
   grid-row:2/3;
