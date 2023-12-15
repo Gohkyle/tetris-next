@@ -6,14 +6,14 @@
   --border-right-color: rgba(0, 0, 0, 0.15);
   --border-bottom-color: rgba(0, 0, 0, 0.5);
   
-  --color-0: #ffffff;
-  --color-1: #ff6600;
-  --color-2: #eec900;
-  --color-3: #0000ff;
-  --color-4: #cc00ff;
-  --color-5: #00ff00;
-  --color-6: #66ccff;
-  --color-7: #ff0000;
+  --color-0: #000000;
+  --color-L: #ff6600;
+  --color-O: #eec900;
+  --color-J: #0000ff;
+  --color-T: #cc00ff;
+  --color-S: #00ff00;
+  --color-I: #66ccff;
+  --color-Z: #ff0000;
   
   --cols: 10;
   --rows: 20;

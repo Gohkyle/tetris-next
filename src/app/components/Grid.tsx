@@ -10,7 +10,7 @@ export const Grid = () => {
         <div className="grid-container">
             {grid.map((line: number [], row: number)=>{
                 return line.map((square: number, column: number)=>{
-                    return (<Square key={`${row} ${column}`} color="3"/>)
+                    return (<Square key={`${row} ${column}`} color="0"/>)
                 })
             })}
         </div>
