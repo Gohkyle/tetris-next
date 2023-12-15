@@ -8,7 +8,6 @@ export const StyledNextBlock = styled.div<{size: number}>`
   grid-template-columns: repeat(${props=>props.size}, var(--square-size));
   grid-template-rows: repeat(${props=>props.size}, var(--square-size));
   place-content: center;
-  grid-gap: 0;
 
 
   background-color: var(--color-0);
