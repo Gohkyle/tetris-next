@@ -1,10 +1,68 @@
-export const tetrominos = {
-    0: {shape: [[0]], color: "color-1"},
-    I: {shape: [[0]], color: "color- 2"},
-    L: {shape: [[0]], color: "color- 3"},
-    J: {shape: [[0]], color: "color- 4"},
-    O: {shape: [[0]], color: "color- 5"},
-    S: {shape: [[0]], color: "color- 6"},
-    Z: {shape: [[0]], color: "color- 7"},
-    T: {shape: [[0]], color: "color- 8"},
-8
+type Shape = 0 | "I" | "L" | "J" | "O" | "T" | "S" | "Z";
+
+interface TetrominosItem {
+  type: Shape;
+  structure: (1 | 0)[][];
+}
+export const tetrominos: TetrominosItem[] = [
+  {
+    type: 0,
+    structure: [[0]],
+  },
+  {
+    type: "L",
+    structure: [
+      [1, 0, 0],
+      [1, 0, 0],
+      [1, 1, 0],
+    ],
+  },
+  {
+    type: "J",
+    structure: [
+      [0, 1, 0],
+      [0, 1, 0],
+      [1, 1, 0],
+    ],
+  },
+  {
+    type: "O",
+    structure: [
+      [1, 1],
+      [1, 1],
+    ],
+  },
+  {
+    type: "S",
+    structure: [
+      [0, 0, 0],
+      [0, 1, 1],
+      [1, 1, 0],
+    ],
+  },
+  {
+    type: "Z",
+    structure: [
+      [0, 0, 0],
+      [1, 1, 0],
+      [0, 1, 1],
+    ],
+  },
+  {
+    type: "T",
+    structure: [
+      [0, 0, 0],
+      [1, 1, 1],
+      [0, 1, 0],
+    ],
+  },
+  {
+    type: "I",
+    structure: [
+      [1, 0, 0, 0],
+      [1, 0, 0, 0],
+      [1, 0, 0, 0],
+      [1, 0, 0, 0],
+    ],
+  },
+];
