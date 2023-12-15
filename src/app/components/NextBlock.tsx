@@ -7,7 +7,7 @@ export const NextBlock = () => {
         <div className = "next-block-grid-container">
             {nextBlock.map((blockLine: number[])=>{
                 return blockLine.map((blockLineSquare)=>{
-                    return <Square color={0}/>
+                    return <Square color="0"/>
                 })
             })}
 

@@ -6,7 +6,7 @@ interface TetrominosItem {
 }
 export const tetrominos: TetrominosItem[] = [
   {
-    type: 0,
+    type: "0",
     structure: [[0]],
   },
   {
