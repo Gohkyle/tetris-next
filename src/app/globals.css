@@ -21,15 +21,7 @@
   --border-width: 4px;
 }
 
-.grid-container{
-  grid-column: 2/3;
-  grid-row:2/3;
-  background-color: var(--bg-color);
-  display: grid;
-  grid-template-columns: repeat(var(--cols), var(--square-size));
-  grid-gap: 0;
-  align-self:flex-start;
-}
+
 
 .next-block-grid-container{
   grid-column: 3/4;
