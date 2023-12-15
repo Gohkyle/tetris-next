@@ -1,15 +1,18 @@
-import { Grid } from './Grid'
+import { Stage } from './Grid'
 import { NextBlock } from './NextBlock'
 import { ScoreBoard } from './ScoreBoard'
 import { MessageModal } from './MessageModal'
+import { StyledTetris } from './styles/StyledTetris'
 
 export const Tetris = () => {
     return (
-        <div className = "tetris-container" >
-            <Grid/>
-            <NextBlock/>
-            <ScoreBoard/>
+        <StyledTetris>
+            <Stage/>
+            <aside>
+                <NextBlock/>
+                <ScoreBoard/>
+            </aside>
             <MessageModal title="title" text="text"/>
-        </div>
+        </StyledTetris>
     )
 }
