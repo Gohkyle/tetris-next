@@ -1,4 +1,5 @@
 import {Square} from './Square'
+import  {StyledStage} from './styles/StyledStage'
 
 export const Stage = () => {
 
@@ -7,13 +8,13 @@ export const Stage = () => {
     const grid: 1 | 0 [][]= new Array(rows).fill(new Array(columns).fill(0))
 
     return (
-        <div className="grid-container">
+        <StyledStage>
             {grid.map((line: number [], row: number)=>{
                 return line.map((square: number, column: number)=>{
                     return (<Square key={`${row} ${column}`} color="0"/>)
                 })
             })}
-        </div>
+        </StyledStage>
     )
 } 
 
