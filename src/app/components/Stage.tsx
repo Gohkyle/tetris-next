@@ -1,6 +1,6 @@
 import {Square} from './Square'
 
-export const Grid = () => {
+export const Stage = () => {
 
     const rows: number = 20
     const columns: number = 10
