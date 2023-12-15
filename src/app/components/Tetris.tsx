@@ -1,4 +1,4 @@
-import { Stage } from './Grid'
+import { Stage } from './Stage'
 import { NextBlock } from './NextBlock'
 import { ScoreBoard } from './ScoreBoard'
 import { MessageModal } from './MessageModal'
