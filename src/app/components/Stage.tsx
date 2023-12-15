@@ -1,4 +1,4 @@
-import {Square} from './Square'
+import { Square } from './Square'
 import { StyledStage } from './styles/StyledStage'
 import { Shape } from '../types'
 
