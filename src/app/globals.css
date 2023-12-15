@@ -1,12 +1,12 @@
 :root {
-  --bg-color: rgb(0, 0, 0);
+  --bg-color: rgba(0, 0, 0, 0.8);
   
   --border-left-color: rgba(255, 255, 255, 0.20);
   --border-top-color: rgba(255, 255, 255, 0.33);
   --border-right-color: rgba(0, 0, 0, 0.15);
   --border-bottom-color: rgba(0, 0, 0, 0.5);
   
-  --color-0: #000000;
+  --color-0: #383838;
   --color-L: #ff6600;
   --color-O: #eec900;
   --color-J: #0000ff;
@@ -23,7 +23,7 @@
 
 .message-modal{
   position: absolute;
-  left:50%;
+  right:50px;;
   top:50%;
   transform: translate(-50%, -50%);
 
