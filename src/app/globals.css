@@ -21,18 +21,6 @@
   --border-width: 4px;
 }
 
-
-
-.next-block-grid-container{
-  grid-column: 3/4;
-  grid-row:2/3;
-  background-color: var(--bg-color);
-  display: grid;
-  grid-template-columns: repeat(4, var(--square-size));
-  grid-gap: 0;
-  align-self:flex-start;
-}
-
 .message-modal{
   position: absolute;
   left:50%;

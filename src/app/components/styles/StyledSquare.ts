@@ -1,6 +1,7 @@
+import { Shape } from "@/app/types";
 import styled from "styled-components";
 
-export const StyledSquare = styled.div`
+export const StyledSquare = styled.div<{color: Shape}>`
   background-color: var(--color-${(props) => props.color});
   border-style: solid;
   box-sizing: border-box;

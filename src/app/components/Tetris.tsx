@@ -9,7 +9,7 @@ export const Tetris = () => {
     return (
         <StyledTetris>
             <Stage stage={createStage()}/>
-            <NextBlock/>
+            <NextBlock nextBlock={[["O","O"],["O", "O"]]} />
             <ScoreBoard/>
             <MessageModal title="title" text="text"/>
         </StyledTetris>

@@ -1,16 +1,23 @@
 import { Square } from "./Square"
 
-export const NextBlock = () => {
-    const nextBlock: number [][] = Array(4).fill([0, 0, 0, 0])
+import { Shape } from "../types"
 
+import { StyledNextBlock } from "./styles/StyledNextBlock"
+
+interface Tetrominos{
+    nextBlock: Shape[][]
+}
+
+export const NextBlock = ({nextBlock}:Tetrominos) => {
     return(
-        <div className = "next-block-grid-container">
-            {nextBlock.map((blockLine: number[])=>{
-                return blockLine.map((blockLineSquare)=>{
-                    return <Square color="0"/>
+        <StyledNextBlock size={nextBlock.length}>
+
+            {nextBlock.map((nextBlockLine: Shape[], lines:number)=>{
+                return nextBlockLine.map((nextBlockLineSquare, blocks:number)=>{
+                    return <Square key= {`n${lines}${blocks}` } color={nextBlockLineSquare}/>
                 })
             })}
 
-        </div>
+        </StyledNextBlock>
     )
 }
