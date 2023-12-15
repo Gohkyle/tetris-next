@@ -1,10 +1,12 @@
+import { StyledMessageModal } from "./styles/StyledMessageModal";
+
 interface IProps {
     title:string;
     text:string;
 }
 export const MessageModal = ({title, text}:IProps) => {
     return(
-        <div className="message-modal">
+        <StyledMessageModal>
             <h2>{title}</h2>
             <p>{text}</p>
             <button className = "scoreboard-button" onClick={()=>{}}>
@@ -13,6 +15,7 @@ export const MessageModal = ({title, text}:IProps) => {
             <button className = "scoreboard-button" onClick ={()=>{}}>
                 RESTART
             </button>
-        </div> 
+        </StyledMessageModal>
+
     )
 }

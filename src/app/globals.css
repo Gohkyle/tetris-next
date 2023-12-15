@@ -21,19 +21,7 @@
   --border-width: 4px;
 }
 
-.message-modal{
-  position: absolute;
-  right:50px;;
-  top:50%;
-  transform: translate(-50%, -50%);
 
-  text-align: center;
-
-  background-color: rgb(255, 255, 255, 0.5);
-  width: 100px;
-  height:100px;
-
-}
 
 .message-modal.hidden {
   display: none;
