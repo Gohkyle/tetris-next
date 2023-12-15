@@ -1,10 +1,4 @@
 :root {
-  --bg-color: rgba(0, 0, 0, 0.8);
-  
-  --border-left-color: rgba(255, 255, 255, 0.20);
-  --border-top-color: rgba(255, 255, 255, 0.33);
-  --border-right-color: rgba(0, 0, 0, 0.15);
-  --border-bottom-color: rgba(0, 0, 0, 0.5);
   
   --color-0: #383838;
   --color-L: #ff6600;
@@ -15,8 +9,6 @@
   --color-I: #66ccff;
   --color-Z: #ff0000;
   
-  --cols: 10;
-  --rows: 20;
   --square-size: 20px;
   --border-width: 4px;
 }

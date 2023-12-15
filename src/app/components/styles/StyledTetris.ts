@@ -7,7 +7,6 @@ export const StyledTetris = styled.div`
   justify-content: center;
 
   max-width:1000px;
-  height: auto;
 
   position:relative;
 `;

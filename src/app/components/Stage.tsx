@@ -8,7 +8,7 @@ interface Stage{
 
 export const Stage = ({stage}:Stage) => {
     return (
-        <StyledStage>
+        <StyledStage height={stage.length} width={stage[0].length}>
             {stage.map((line: Shape [], row: number)=>{
                 return line.map((square: Shape, column: number)=>{
                     return (<Square key={`${row} ${column}`} color={square}/>)
