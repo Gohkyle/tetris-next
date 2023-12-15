@@ -25,38 +25,6 @@
   background-color: var(--color-0);
 }
 
-.color-1 {
-  background-color: var(--color-1);
-}
-
-.color-2 {
-  background-color: var(--color-2);
-}
-
-.color-3 {
-  background-color: var(--color-3);
-}
-
-.color-4 {
-  background-color: var(--color-4);
-}
-
-.color-5 {
-  background-color: var(--color-5);
-}
-
-.color-6 {
-  background-color: var(--color-6);
-}
-
-.color-7 {
-  background-color: var(--color-7);
-}
-
-.app{
-  margin: auto;
-}
-
 .tetris-container{
   --grid-width: calc((var(--square-size) * var(--cols)));
   --grid-height: calc((var(--square-size) * var(--rows)));

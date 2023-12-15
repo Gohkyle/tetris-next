@@ -6,6 +6,6 @@ interface IProps {
 
 export const Square = ({color}:IProps) => {
     return (
-        <StyledSquare color = "4"/>
+        <StyledSquare color={color}/>
     )
 }
