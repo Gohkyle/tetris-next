@@ -9,8 +9,10 @@ export const Tetris = () => {
     return (
         <StyledTetris>
             <Stage stage={createStage()}/>
+            <aside>
             <NextBlock nextBlock={[["O","O"],["O", "O"]]} />
             <ScoreBoard/>
+            </aside>
             <MessageModal title="title" text="text"/>
         </StyledTetris>
     )
