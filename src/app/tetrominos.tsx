@@ -1,4 +1,4 @@
-type Shape = 0 | "I" | "L" | "J" | "O" | "T" | "S" | "Z";
+import { Shape } from "./types";
 
 interface TetrominosItem {
   type: Shape;
