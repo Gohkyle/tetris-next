@@ -8,10 +8,8 @@ export const Tetris = () => {
     return (
         <StyledTetris>
             <Stage/>
-            <aside>
                 <NextBlock/>
                 <ScoreBoard/>
-            </aside>
             <MessageModal title="title" text="text"/>
         </StyledTetris>
     )
