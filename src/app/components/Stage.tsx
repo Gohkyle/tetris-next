@@ -1,15 +1,14 @@
 import {Square} from './Square'
 import  {StyledStage} from './styles/StyledStage'
 
-export const Stage = () => {
+interface Stage{
+    stage: (1|0)[][]
+}
 
-    const rows: number = 20
-    const columns: number = 10
-    const grid: 1 | 0 [][]= new Array(rows).fill(new Array(columns).fill(0))
-
+export const Stage = ({stage}:Stage) => {
     return (
         <StyledStage>
-            {grid.map((line: number [], row: number)=>{
+            {stage.map((line: number [], row: number)=>{
                 return line.map((square: number, column: number)=>{
                     return (<Square key={`${row} ${column}`} color="0"/>)
                 })
