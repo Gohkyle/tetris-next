@@ -6,7 +6,7 @@ export const StyledSquare = styled.div<{color: Shape}>`
   border-style: solid;
   box-sizing: border-box;
   width: auto;
-  height:auto;
+  height: auto;
 
   border-width: ${(props) =>
     props.color === "0" ? "0px" : "var(--border-width)"};
