@@ -4,17 +4,17 @@ import { Shape } from "../types"
 
 import { StyledNextBlock } from "./styles/StyledNextBlock"
 
-interface Tetrominos{
+interface IProps {
     nextBlock: Shape[][]
 }
 
-export const NextBlock = ({nextBlock}:Tetrominos) => {
+export const NextBlock = ({nextBlock}:IProps) => {
     return(
         <StyledNextBlock size={nextBlock.length}>
 
-            {nextBlock.map((nextBlockLine: Shape[], lines:number)=>{
-                return nextBlockLine.map((nextBlockLineSquare, blocks:number)=>{
-                    return <Square key= {`n${lines}${blocks}` } color={nextBlockLineSquare}/>
+            {nextBlock.map((nextBlockLine: Shape[], line:number)=>{
+                return nextBlockLine.map((nextBlockLineSquare, block:number)=>{
+                    return <Square key={`n${line}${block}`} color={nextBlockLineSquare}/>
                 })
             })}
 
