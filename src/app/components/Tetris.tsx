@@ -37,7 +37,7 @@ export const Tetris = () => {
     // }
   };
 
-  const [nextBlock, setNextBlock] = useState(randomTetromino());
+  const [nextBlock, setNextBlock] = useState([[0]]);
   const [player, setPlayer] = useState({
     currTetro: [[0]],
     position: { x: 0, y: 0 },
@@ -49,8 +49,6 @@ export const Tetris = () => {
 
   const startGame = () => {
   };
-
-  console.log(nextBlock)
   return (
     <StyledTetris tabIndex={0} onKeyUp={handleButtonPress}>
       <Stage stage={stage} />
