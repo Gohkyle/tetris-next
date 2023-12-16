@@ -12,6 +12,7 @@ export const StyledNextBlock = styled.div<{size: number}>`
 
   background-color: var(--color-0);
 
+  padding: 10px;
   border: 5px solid grey;
   border-radius: 5px;
 `;
