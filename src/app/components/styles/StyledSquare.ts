@@ -9,7 +9,7 @@ export const StyledSquare = styled.div<{color: Shape}>`
   height: auto;
 
   border-width: ${(props) =>
-    props.color === "0" ? "0px" : "var(--border-width)"};
+    props.color === 0 ? "0px" : "var(--border-width)"};
   border-left-color: rgba(255, 255, 255, 0.20);
   border-top-color: rgba(255, 255, 255, 0.33);
   border-right-color: rgba(0, 0, 0, 0.15);
