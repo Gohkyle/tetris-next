@@ -1,11 +1,13 @@
+import { StyledDisplay } from "./styles/StyledDisplay";
+
 interface iProps {
-    text: string
+  text: string;
 }
 
-export const Display = ({text}: iProps) => {
-    return (
-        <div className="display-container" >
-            {text}
-        </div>
-    )
-}
+export const Display = ({ text }: iProps) => {
+  return (
+  <StyledDisplay>
+    {text}
+</StyledDisplay>
+  )
+};

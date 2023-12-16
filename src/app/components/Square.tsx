@@ -1,11 +1,13 @@
+import { StyledSquare } from "./styles/StyledSquare"
+
+import { Shape } from "../types"
+
 interface IProps {
-    color: string
+    color: Shape
 }
 
 export const Square = ({color}:IProps) => {
     return (
-        <div className={`grid-square color-${color}`} >
-
-        </div>
+        <StyledSquare color={color}/>
     )
 }

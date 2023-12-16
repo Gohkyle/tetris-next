@@ -1,124 +1,21 @@
 :root {
-  --bg-color: rgb(0, 0, 0);
+  --color-0: #383838;
+  --color-L: #ff6600;
+  --color-O: #eec900;
+  --color-J: #0000ff;
+  --color-T: #cc00ff;
+  --color-S: #00ff00;
+  --color-I: #66ccff;
+  --color-Z: #ff0000;
   
-  --border-left-color: rgba(255, 255, 255, 0.20);
-  --border-top-color: rgba(255, 255, 255, 0.33);
-  --border-right-color: rgba(0, 0, 0, 0.15);
-  --border-bottom-color: rgba(0, 0, 0, 0.5);
-  
-  --color-0: #ffffff;
-  --color-1: #ff6600;
-  --color-2: #eec900;
-  --color-3: #0000ff;
-  --color-4: #cc00ff;
-  --color-5: #00ff00;
-  --color-6: #66ccff;
-  --color-7: #ff0000;
-  
-  --cols: 10;
-  --rows: 20;
   --square-size: 20px;
   --border-width: 4px;
-}
-
-.color-0 {
-  background-color: var(--color-0);
-}
-
-.color-1 {
-  background-color: var(--color-1);
-}
-
-.color-2 {
-  background-color: var(--color-2);
-}
-
-.color-3 {
-  background-color: var(--color-3);
-}
-
-.color-4 {
-  background-color: var(--color-4);
-}
-
-.color-5 {
-  background-color: var(--color-5);
-}
-
-.color-6 {
-  background-color: var(--color-6);
-}
-
-.color-7 {
-  background-color: var(--color-7);
-}
-
-.app{
-  margin: auto;
-}
-
-.tetris-container{
-  --grid-width: calc((var(--square-size) * var(--cols)));
-  --grid-height: calc((var(--square-size) * var(--rows)));
-
-  display: grid;
-  grid-gap: var(--square-size);
-  grid-template-columns: 100px var(--grid-width) 100px;
-  grid-template-rows:100px var(--grid-height) 100px;
-
-  justify-content: center;
   
 }
 
-.grid-container{
-  grid-column: 2/3;
-  grid-row:2/3;
-  background-color: var(--bg-color);
-  display: grid;
-  grid-template-columns: repeat(var(--cols), var(--square-size));
-  grid-gap: 0;
-  align-self:flex-start;
-}
-
-.grid-square{
-  border-style: solid;
-  box-sizing: border-box;
-  width: var(--square-size);
-  height: var(--square-size);
-  border-width: var(--border-width);
-  border-top-color: var(--border-top-color);
-  border-right-color: var(--border-right-color);
-  border-bottom-color: var(--border-bottom-color);
-  border-left-color: var(--border-left-color);
-}
-
-.next-block-grid-container{
-  grid-column: 3/4;
-  grid-row:2/3;
-  background-color: var(--bg-color);
-  display: grid;
-  grid-template-columns: repeat(4, var(--square-size));
-  grid-gap: 0;
-  align-self:flex-start;
-}
-
-.scoreboard-container{
-  grid-column:1/2;
-  grid-row:2/3;
-}
-
-.message-modal{
-  position: absolute;
-  left:50%;
-  top:50%;
-  transform: translate(-50%, -50%);
-
-  text-align: center;
-
-  background-color: rgb(255, 255, 255, 0.5);
-  width: 100px;
-  height:100px;
-
+@font-face {
+  font-family: "PressStart2P";
+  src: url("./font/PressStart2P-Regular.ttf") format("truetype")
 }
 
 .message-modal.hidden {
