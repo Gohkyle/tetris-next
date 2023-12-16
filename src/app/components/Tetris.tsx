@@ -17,9 +17,9 @@ interface IProps {
 export const Tetris = () => {
   const handleButtonPress = ({ keyCode }: IProps) => {
     console.log(keyCode)
-    if(keyCode===27){
-        setIsModalHidden(false);
-    }
+    // if(keyCode===27){
+
+    // }
     // if (keyCode===37){
     //     movePlayer(-1);
     // }
@@ -37,7 +37,6 @@ export const Tetris = () => {
     // }
   };
 
-  const [isModalHidden, setIsModalHidden] = useState(false);
   const [nextBlock, setNextBlock] = useState(randomTetromino());
   const [player, setPlayer] = useState({
     currTetro: [[0]],
@@ -49,9 +48,9 @@ export const Tetris = () => {
   const [isGameOver, setIsGameOver] = useState(false);
 
   const startGame = () => {
-    setIsModalHidden(true);
   };
 
+  console.log(nextBlock)
   return (
     <StyledTetris tabIndex={0} onKeyUp={handleButtonPress}>
       <Stage stage={stage} />
@@ -60,7 +59,7 @@ export const Tetris = () => {
         <Display text="score" />
         <Display text="level" />
       </aside>
-      <MessageModal title="title" text="text" isModalHidden={isModalHidden} startGame={startGame} />
+      <MessageModal title="title" text="text"/>
     </StyledTetris>
   );
 };
