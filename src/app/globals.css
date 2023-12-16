@@ -1,5 +1,4 @@
 :root {
-  
   --color-0: #383838;
   --color-L: #ff6600;
   --color-O: #eec900;
@@ -11,9 +10,13 @@
   
   --square-size: 20px;
   --border-width: 4px;
+  
 }
 
-
+@font-face {
+  font-family: "PressStart2P";
+  src: url("./font/PressStart2P-Regular.ttf") format("truetype")
+}
 
 .message-modal.hidden {
   display: none;
