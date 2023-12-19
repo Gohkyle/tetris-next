@@ -10,7 +10,7 @@ export const useStage = (player: Player
     const [stage, setStage] = useState(createStage())
 
     useEffect(()=>{
-        const updateStage = (prevStage: Shape[][]): => {
+        const updateStage = (prevStage: Shape[][]) => {
             const newStage = prevStage.map((row)=>{
                 return row.map((square: Shape): Shape=>{
                     return 0;
