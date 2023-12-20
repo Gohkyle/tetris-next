@@ -28,7 +28,7 @@ export const useStage = (player: Player) => {
       return newStage;
     };
 
-    setStage((prevStage) => updateStage(prevStage));
+    setStage((prevStage:Shape[][]) : Shape [][]=> updateStage(prevStage));
 console.log( "useEffect rendering")
   }, [player]);
 
