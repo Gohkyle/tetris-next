@@ -17,10 +17,24 @@ describe("checkCollision", ()=>{
             }
         const stage = createStage()
         const movement = {x: 0, y: 0};
-        
-        expect(checkCollision(player,stage, movement)).toBe(false)
+
+        expect(checkCollision(player, stage, movement)).toBe(false)
     })
-    test("for non-blank tetromino, returns true if tetromino movement leaves stage x-direction", () => {
+    test("player position, returns true if player position movement leaves stage x-direction", () => {
+        const player = {
+            currTetro:[
+                ["O", "O"],
+                ["O", "O"],
+            ], 
+            position:{x:9, y:0}, 
+            hasCollided:false
+            }
+        const stage = createStage()
+        const movement = {x: 1, y: 0};
+        
+        expect(checkCollision(player, stage, movement)).toBe(true)
+    })
+    test("returns true when non blank tetromino movement leaves stage", () => {
         const player = {
             currTetro:[
                 ["O", "O"],
@@ -30,6 +44,10 @@ describe("checkCollision", ()=>{
             hasCollided:false
             }
         const stage = createStage()
-        const movement = {x: 0, y: 0};
+        const movement = {x: 1, y: 0};
+
+        console.log(stage[player.position.y][player.position.x+ movement.x+player.currTetro.length -1])
+
+        expect(checkCollision(player, stage, movement)).toBe(true)
     })
 })
