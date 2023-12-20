@@ -13,7 +13,7 @@ import { usePlayer } from "../hooks/usePlayer";
 import { useEffect, useState } from "react";
 
 import { Shape } from "../types";
-import { createStage } from "../gameHelper";
+import { createStage } from "../utils/gameHelper";
 
 interface IProps {
   keyCode: number;

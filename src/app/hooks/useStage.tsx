@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { createStage } from "../gameHelper";
+import { createStage } from "../utils/gameHelper";
 
 import { Shape, Player } from "../types";
 

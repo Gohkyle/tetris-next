@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { columns } from "../gameHelper";
+import { columns } from "../utils/gameHelper";
 import { randomTetromino } from "../tetrominos";
 import { Player } from "../types";
 
