@@ -10,16 +10,17 @@ import { Display } from "./Display";
 import { useStage } from "../hooks/useStage";
 import { usePlayer } from "../hooks/usePlayer";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Shape, Player } from "../types";
+import { Shape } from "../types";
+import { createStage } from "../gameHelper";
 
 interface IProps {
   keyCode: number;
 }
 
 export const Tetris = () => {
-  const [player, updatePlayerPos] = usePlayer();
+  const [player, updatePlayerPos, resetPlayer] = usePlayer();
   const [stage, setStage] = useStage(player);
   const [nextBlock, setNextBlock] = useState<Shape[][]>([[0]]);
 
@@ -46,15 +47,24 @@ export const Tetris = () => {
     // }
   };
 
+  const startGame = () => {
+    setStage(createStage());
+    resetPlayer();
+  };
+
+  useEffect(()=>{
+    console.log(player.currTetro)
+  }, [player])
+
   return (
-    <StyledTetris role= "button" tabIndex={0} onKeyUp={handleButtonPress}>
+    <StyledTetris role="button" tabIndex={0} onKeyUp={handleButtonPress}>
       <Stage stage={stage} />
       <aside>
         <NextBlock nextBlock={nextBlock} />
         <Display text="score" />
         <Display text="level" />
       </aside>
-      <MessageModal title="title" text="text" />
+      <MessageModal title="title" text="text" startGame={startGame} />
     </StyledTetris>
   );
 };

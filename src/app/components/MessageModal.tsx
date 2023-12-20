@@ -1,21 +1,11 @@
-import { createStage } from "../gameHelper";
-import { usePlayer } from "../hooks/usePlayer";
-import { useStage } from "../hooks/useStage";
 import { StyledMessageModal } from "./styles/StyledMessageModal";
 
 interface IProps {
     title:string;
     text:string;
+    startGame: () => void;
 }
-export const MessageModal = ({title, text}:IProps) => {
-    const [player, updatePlayerPos, resetPlayer] = usePlayer()
-    const [stage, setStage] = useStage(player)
-
-    const startGame = () => {
-        setStage(createStage())
-        resetPlayer()
-    }
-
+export const MessageModal = ({title, text, startGame}:IProps) => {
 
     return(
         <StyledMessageModal>
