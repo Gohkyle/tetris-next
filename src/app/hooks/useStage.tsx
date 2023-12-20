@@ -8,6 +8,7 @@ export const useStage = (player: Player) => {
   const [stage, setStage] = useState(createStage());
 
   useEffect(() => {
+
     const updateStage = (prevStage: Shape[][]) => {
       const newStage = prevStage.map((row) => {
         return row.map((square: Shape): Shape => {
@@ -28,7 +29,7 @@ export const useStage = (player: Player) => {
     };
 
     setStage((prevStage) => updateStage(prevStage));
-
+console.log( "useEffect rendering")
   }, [player]);
 
   return [stage, setStage] as const;
