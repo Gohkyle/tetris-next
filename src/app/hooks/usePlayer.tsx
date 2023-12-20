@@ -26,9 +26,8 @@ export const usePlayer = () => {
         })
     }
 
-    const resetPlayer = useCallback(():void=>{
+    const resetPlayer = useCallback(()=>{
         const nextBlock = randomTetromino();
-        console.log(nextBlock, "random tetromino from resetPlayer")
         setPlayer({
             currTetro: nextBlock,
             position:{x: columns/2 - Math.floor(nextBlock.length/2), y: 0},
