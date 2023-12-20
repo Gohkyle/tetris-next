@@ -6,5 +6,5 @@ export const createStage = () => {
 }
 
 export const checkCollision = () => {
-    return "hello"
+    return false;
 }
