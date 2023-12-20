@@ -46,8 +46,20 @@ describe("checkCollision", ()=>{
         const stage = createStage()
         const movement = {x: 1, y: 0};
 
-        console.log(stage[player.position.y][player.position.x+ movement.x+player.currTetro.length -1])
-
         expect(checkCollision(player, stage, movement)).toBe(true)
+    })
+    test("returns false, when tetromino with blank squares move out the stage", () => {
+        const player = {
+            currTetro:[
+                [0, "J", 0],
+                [0, "J", 0],
+                ["J", "J", 0],
+            ], 
+            position:{x:7, y:0}, 
+            hasCollided:false
+            }
+        const stage = createStage()
+        const movement = {x: 1, y: 0};
+        expect(checkCollision(player, stage, movement)).toBe(false)
     })
 })
