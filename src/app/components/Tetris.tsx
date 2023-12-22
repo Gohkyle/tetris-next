@@ -12,8 +12,8 @@ import { usePlayer } from "../hooks/usePlayer";
 
 import { useEffect, useState } from "react";
 
-import { Shape } from "../types";
-import { createStage } from "../utils/gameHelper";
+import { Movement, Shape } from "../types";
+import { checkCollision, createStage } from "../utils/gameHelper";
 
 interface IProps {
   keyCode: number;
@@ -31,17 +31,30 @@ export const Tetris = () => {
 
     // }
     if (keyCode === 37) {
-      movePlayer({ x: -1, y: 0, hasCollided: false });
+      const moveLeft: Movement = { x: -1, y: 0, hasCollided: false }
+      const collisionStatus = checkCollision(player, stage, {x:moveLeft.x, y:0})
+      console.log(collisionStatus)
+        movePlayer(moveLeft);
+      // } 
     }
     // if (keyCode===38){
     //   rotatePlayer()
     // }
     if (keyCode === 39) {
-      movePlayer({ x: 1, y: 0, hasCollided: false });
+      const moveRight = { x: 1, y: 0, hasCollided: false }
+      
+      const collisionStatus = checkCollision(player, stage, {x:moveRight.x, y:0})
+      console.log(collisionStatus)
+        movePlayer(moveRight);
+
     }
     if (keyCode === 40) {
-      movePlayer({ x: 0, y: 1, hasCollided: false });
-    }
+      const moveDown = { x: 0, y: 1, hasCollided: false }
+      const collisionStatus = checkCollision(player, stage, {x:0, y:moveDown.y})
+      console.log(collisionStatus)
+        movePlayer(moveDown);
+      } 
+    
     // if (keyCode === 32) {
     //   dropPlayer();
     // }
@@ -52,9 +65,11 @@ export const Tetris = () => {
     resetPlayer();
   };
 
-  // useEffect(()=>{
-  //   console.log(player.currTetro)
-  // }, [player])
+  useEffect(()=>{
+    console.log(player.position)
+    console.log(stage)
+
+  }, [player,stage])
 
   return (
     <StyledTetris role="button" tabIndex={0} onKeyUp={handleButtonPress}>

@@ -1,5 +1,10 @@
 export type Shape = 0 | "I" | "L" | "J" | "O" | "T" | "S" | "Z";
 
+export interface SquareObject{
+    type: Shape,
+    dropped: boolean
+}
+
 export interface Player{
     currTetro: Shape[][],
     position: Position

@@ -1,16 +1,16 @@
-import { Movement, Player, Position, Shape } from "../types";
+import { Movement, Player, Position, Shape, SquareObject } from "../types";
 
 export const rows: number = 20;
 export const columns: number = 10;
 
 export const createStage = () => {
-  return new Array(rows).fill(new Array(columns).fill(0));
+  return new Array(rows).fill(new Array(columns).fill({type:0, dropped: false}));
 };
 
-export const updateStage = (prevStage: Shape[][], player: Player) => {
+export const updateStage = (prevStage: SquareObject[][], player: Player) => {
   const newStage = prevStage.map((row) => {
-    return row.map((square: Shape): Shape => {
-      return 0;
+    return row.map((square: SquareObject) : SquareObject=> {
+      return square.dropped ? square: {type:0, dropped: false}
     });
   });
 
@@ -18,7 +18,7 @@ export const updateStage = (prevStage: Shape[][], player: Player) => {
     return row.forEach((square: Shape, x: number) => {
       if (square !== 0) {
         return (newStage[y + player.position.y][x + player.position.x] =
-          square);
+          {type:square, dropped: false});
       }
     });
   });
@@ -35,7 +35,7 @@ export const updatePlayerPos = (player: Player, {x, y, hasCollided}:Movement)=> 
 
 export const checkCollision = (
   player: Player,
-  stage: Shape[][],
+  stage: SquareObject[][],
   movement: Position
 ) => {
   for (let i = 0; i < player.currTetro[0].length; i++) {
@@ -50,13 +50,13 @@ export const checkCollision = (
         ) {
           return true;
         }
-        if (
-          stage[player.position.y + movement.y + i][
-            player.position.x + movement.x + j
-          ] !== 0
-        ) {
-          return true;
-        }
+        // if (
+        //   stage[player.position.y + movement.y + i][
+        //     player.position.x + movement.x + j
+        //   ] !== 0
+        // ) {
+        //   return true;
+        // }
       }
     }
   }

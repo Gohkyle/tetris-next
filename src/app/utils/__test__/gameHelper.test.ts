@@ -1,4 +1,4 @@
-import { Movement, Player, Shape } from "@/app/types";
+import { Movement, Player, Shape, SquareObject } from "@/app/types";
 import { columns, rows, updatePlayerPos, updateStage } from "../gameHelper";
 import { randomTetromino } from "../../tetrominos";
 
@@ -15,19 +15,20 @@ describe("createStage()", () => {
   test("returns an array of arrays of length equivalent to the columns variable", () => {
     expect(createStage()[0]).toHaveLength(columns);
   });
-  test("returns an array, of arrays of only 0 values", () => {
-    expect(createStage().flat()).toContain(0);
+  test("returns an array, of arrays of only {type:0, dropped: false}", () => {
+    expect(createStage().flat()).toContainEqual({type:0, dropped: false});
 
     createStage().forEach((row: []) => {
-      row.forEach((value) => {
-        expect(value).toBe(0);
+      row.forEach(({type, dropped}) => {
+        expect(type).toBe(0);
+        expect(dropped).toBe(false);
       });
     });
   });
 });
 describe("updateStage()", () => {
   test("takes a prevStage array and a player object, and returns an array", () => {
-    const prevStage: Shape[][] = createStage();
+    const prevStage: SquareObject[][] = createStage();
     const player: Player = {
       currTetro: randomTetromino(),
       position: { x: 0, y: 0 },
@@ -36,7 +37,7 @@ describe("updateStage()", () => {
     expect(updateStage(prevStage, player)).toBeInstanceOf(Array);
   });
   test("updates stage with the player position occupied for nonblank tetromino", () => {
-    const prevStage: Shape[][] = createStage();
+    const prevStage: SquareObject[][] = createStage();
     const player: Player = {
       currTetro: [
         ["O", "O"],
@@ -48,10 +49,10 @@ describe("updateStage()", () => {
 
     expect(
       updateStage(prevStage, player)[player.position.y][player.position.x]
-    ).toBe("O");
+    ).toEqual({type: "O", dropped: false});
   });
   test("updates stage with the entire tetromino", () => {
-    const prevStage: Shape[][] = createStage();
+    const prevStage: SquareObject[][] = createStage();
     const player: Player = {
       currTetro: [
         ["O", "O"],
@@ -62,13 +63,13 @@ describe("updateStage()", () => {
     };
 
     const updatedStage = updateStage(prevStage, player);
-    expect(updatedStage[0][0]).toBe("O");
-    expect(updatedStage[0][1]).toBe("O");
-    expect(updatedStage[1][0]).toBe("O");
-    expect(updatedStage[1][1]).toBe("O");
+    expect(updatedStage[0][0]).toEqual({type:"O", dropped: false});
+    expect(updatedStage[0][1]).toEqual({type:"O", dropped: false});
+    expect(updatedStage[1][0]).toEqual({type:"O", dropped: false});
+    expect(updatedStage[1][1]).toEqual({type:"O", dropped: false});
   });
   test("returns a new array", () => {
-    const prevStage: Shape[][] = createStage();
+    const prevStage: SquareObject[][] = createStage();
     const player: Player = {
       currTetro: randomTetromino(),
       position: { x: 0, y: 0 },
@@ -77,19 +78,19 @@ describe("updateStage()", () => {
     expect(updateStage(prevStage, player)).not.toEqual(prevStage);
   });
   test("does not mutate original array", () => {
-    const prevStage: Shape[][] = createStage();
+    const prevStage: SquareObject[][] = createStage();
     const player: Player = {
       currTetro: randomTetromino(),
       position: { x: 0, y: 0 },
       hasCollided: false,
     };
-    const copyPrevStage: Shape[][] = createStage();
+    const copyPrevStage: SquareObject[][] = createStage();
 
     updateStage(prevStage, player);
     expect(prevStage).toEqual(copyPrevStage);
   });
 });
-describe.only("updatePlayerPos", () => {
+describe("updatePlayerPos", () => {
   test("returns player object with player position x value updated", () => {
     const player: Player = {
       currTetro: [[0]],
@@ -153,11 +154,7 @@ describe.only("updatePlayerPos", () => {
       position: { x: 0, y: 0 },
       hasCollided: false,
     };
-    const updatedPlayer: Player = {
-      currTetro: [[0]],
-      position: { x: 1, y: 0 },
-      hasCollided: false,
-    };
+  
     const movement: Movement = { x: 0, y: 1, hasCollided: false };
 
   updatePlayerPos(player,movement)
@@ -179,6 +176,24 @@ describe("checkCollision()", () => {
 
     expect(checkCollision(player, stage, movement)).toBe(false);
   });
+  test("returns false, for allowed movement", () =>{
+    const player :Player = {
+      currTetro: [
+        ["O", "O"],
+        ["O", "O"],
+      ],
+      position: { x: 4, y: 0 },
+      hasCollided: false,
+    };
+    const stage = updateStage(createStage, player)
+    const movementR= { x: 1, y: 0 };
+    const movementL= { x: -1, y: 0 };
+    const movementD= { x: 0, y: 1 };
+
+    expect(checkCollision(player, stage, movementR)).toBe(false);
+    expect(checkCollision(player, stage, movementL)).toBe(false);
+    expect(checkCollision(player, stage, movementD)).toBe(false);
+  })
   describe("x-direction", () => {
     test("returns true, when player position leaves stage", () => {
       const player = {
@@ -261,7 +276,6 @@ describe("checkCollision()", () => {
       const stage = createStage();
       const movement = { x: 0, y: 1 };
 
-      console.log(stage[player.position.y + movement.y]);
       expect(checkCollision(player, stage, movement)).toBe(true);
     });
     test("returns true, when tetromino y-movement leaves stage", () => {
