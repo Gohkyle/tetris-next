@@ -20,7 +20,7 @@ interface IProps {
 }
 
 export const Tetris = () => {
-  const [player, updatePlayerPos, resetPlayer] = usePlayer();
+  const [player, movePlayer, resetPlayer] = usePlayer();
   const [stage, setStage] = useStage(player);
   const [nextBlock, setNextBlock] = useState<Shape[][]>([[0]]);
 
@@ -31,16 +31,16 @@ export const Tetris = () => {
 
     // }
     if (keyCode === 37) {
-      updatePlayerPos({ x: -1, y: 0, hasCollided: false });
+      movePlayer({ x: -1, y: 0, hasCollided: false });
     }
     // if (keyCode===38){
     //   rotatePlayer()
     // }
     if (keyCode === 39) {
-      updatePlayerPos({ x: 1, y: 0, hasCollided: false });
+      movePlayer({ x: 1, y: 0, hasCollided: false });
     }
     if (keyCode === 40) {
-      updatePlayerPos({ x: 0, y: 1, hasCollided: false });
+      movePlayer({ x: 0, y: 1, hasCollided: false });
     }
     // if (keyCode === 32) {
     //   dropPlayer();
@@ -52,9 +52,9 @@ export const Tetris = () => {
     resetPlayer();
   };
 
-  useEffect(()=>{
-    console.log(player.currTetro)
-  }, [player])
+  // useEffect(()=>{
+  //   console.log(player.currTetro)
+  // }, [player])
 
   return (
     <StyledTetris role="button" tabIndex={0} onKeyUp={handleButtonPress}>

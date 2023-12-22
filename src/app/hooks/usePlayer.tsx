@@ -1,13 +1,7 @@
 import { useCallback, useState } from "react";
-import { columns } from "../utils/gameHelper";
+import { columns, updatePlayerPos } from "../utils/gameHelper";
 import { randomTetromino } from "../tetrominos";
-import { Player } from "../types";
-
-interface IProps{
-    x: number,
-    y:number,
-    hasCollided: boolean
-}
+import { Movement, Player } from "../types";
 
 export const usePlayer = () => {
     const [player, setPlayer] = useState<Player>({
@@ -16,14 +10,8 @@ export const usePlayer = () => {
         hasCollided: false
     })
     
-    const updatePlayerPos = ({x, y, hasCollided}: IProps) => {
-        setPlayer((prevPlayer)=>{
-            return {
-                ...prevPlayer,
-                position: {x: prevPlayer.position.x + x, y: prevPlayer.position.y + y},
-                hasCollided
-            }
-        })
+    const movePlayer = (movement: Movement) => {
+        setPlayer((prevPlayer)=> updatePlayerPos(prevPlayer, movement))
     }
 
     const resetPlayer = useCallback(()=>{
@@ -35,5 +23,5 @@ export const usePlayer = () => {
         })
     }, [])
     
-    return [player, updatePlayerPos, resetPlayer] as const
+    return [player, movePlayer, resetPlayer] as const
 }
