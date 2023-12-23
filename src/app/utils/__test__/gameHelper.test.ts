@@ -272,7 +272,7 @@ describe("checkCollision()", () => {
           ["O", "O"],
         ],
         position: { x: 7, y: 0 },
-        hasCollided: false,
+        hasCollided: true,
       };
       const updatedStage = updateStage(stage, previousPlayerMovement);
 
@@ -319,7 +319,7 @@ describe("checkCollision()", () => {
           ["J", "J", 0],
         ],
         position: { x: 0, y: 4 },
-        hasCollided: false,
+        hasCollided: true,
       };
       const stage = updateStage(createStage(), player);
       const movement = { x: 0, y: 1 };
@@ -330,7 +330,7 @@ describe("checkCollision()", () => {
           ["O", "O"],
         ],
         position: { x: 0, y: 7 },
-        hasCollided: false,
+        hasCollided: true,
       };
       const updatedStage = updateStage(stage, previousPlayerMovement);
 
