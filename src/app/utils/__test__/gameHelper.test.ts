@@ -1,5 +1,5 @@
 import { Movement, Player, Shape, SquareObject } from "@/app/types";
-import { columns, rows, updatePlayerPos, updateStage } from "../gameHelper";
+import { columns, rows, updatePlayerObj, updateStage } from "../gameHelper";
 import { randomTetromino } from "../../tetrominos";
 
 const { checkCollision, createStage } = require("../gameHelper");
@@ -106,7 +106,7 @@ describe("updateStage()", () => {
     expect(prevStage).toEqual(copyPrevStage);
   });
 });
-describe("updatePlayerPos()", () => {
+describe("updatePlayerObj()", () => {
   test("returns player object with player position x value updated", () => {
     const player: Player = {
       currTetro: [[0]],
@@ -119,7 +119,7 @@ describe("updatePlayerPos()", () => {
       position: { x: 1, y: 0 },
       hasCollided: false,
     };
-    expect(updatePlayerPos(player, movement)).toEqual(updatedPlayer);
+    expect(updatePlayerObj(player, movement)).toEqual(updatedPlayer);
   });
   test("returns player object with player position y value updated", () => {
     const player: Player = {
@@ -133,7 +133,7 @@ describe("updatePlayerPos()", () => {
       position: { x: 0, y: 1 },
       hasCollided: false,
     };
-    expect(updatePlayerPos(player, movement)).toEqual(updatedPlayer);
+    expect(updatePlayerObj(player, movement)).toEqual(updatedPlayer);
   });
   test("returns player object with hasCollided value from the movement object", () => {
     const player: Player = {
@@ -147,7 +147,7 @@ describe("updatePlayerPos()", () => {
       position: { x: 0, y: 1 },
       hasCollided: true,
     };
-    expect(updatePlayerPos(player,movement)).toEqual(updatedPlayer)
+    expect(updatePlayerObj(player,movement)).toEqual(updatedPlayer)
   })
   test("returns a new object", () => {
     const player: Player = {
@@ -157,7 +157,7 @@ describe("updatePlayerPos()", () => {
     };
     const movement: Movement = { x: 0, y: 1, hasCollided: false };
    
-    expect(updatePlayerPos(player,movement)).not.toEqual(player)
+    expect(updatePlayerObj(player,movement)).not.toEqual(player)
   });
   test("does not mutate original object", () => {
     const player: Player = {
@@ -173,7 +173,7 @@ describe("updatePlayerPos()", () => {
   
     const movement: Movement = { x: 0, y: 1, hasCollided: false };
 
-  updatePlayerPos(player,movement)
+  updatePlayerObj(player,movement)
   expect(player).toEqual(copyPlayer)
   });
 });

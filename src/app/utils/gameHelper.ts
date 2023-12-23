@@ -26,7 +26,7 @@ export const updateStage = (prevStage: SquareObject[][], player: Player) => {
   return newStage;
 };
 
-export const updatePlayerPos = (player: Player, {x, y, hasCollided}:Movement)=> {
+export const updatePlayerObj = (player: Player, {x, y, hasCollided}:Movement)=> {
   return {...player,
   position:{x: player.position.x + x, y:player.position.y + y}, 
   hasCollided
