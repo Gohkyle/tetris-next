@@ -66,11 +66,6 @@ export const Tetris = () => {
     resetPlayer();
   };
 
-  useEffect(()=>{
-    console.log(player.position)
-    console.log(stage)
-
-  }, [player,stage])
 
   return (
     <StyledTetris role="button" tabIndex={0} onKeyUp={handleButtonPress}>
