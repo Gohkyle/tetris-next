@@ -47,6 +47,8 @@ to do:
 change variables names of movement
 maybe relook at checkCollision situations
 
+edit the updateplayerobj/updateplayer to take hascollided as an optional argument? parameter?
+
 drop player
 rotate player
 gameover limits set
