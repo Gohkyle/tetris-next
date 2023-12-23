@@ -281,21 +281,20 @@ describe("checkCollision()", () => {
   });
   describe("y-movement", () => {
     test("returns true, when player y-movement leaves stage", () => {
+     // not possible
+    });
+    test("returns true, when tetromino y-movement leaves stage", () => {
       const player: Player = {
         currTetro: [
           ["O", "O"],
           ["O", "O"],
         ],
-        position: { x: 0, y: 19 },
+        position: { x: 0, y: 18 },
         hasCollided: false,
       };
       const stage = updateStage(createStage(), player);
       const movement = { x: 0, y: 1 };
-
       expect(checkCollision(player, stage, movement)).toBe(true);
-    });
-    test("returns true, when tetromino y-movement leaves stage", () => {
-      //not possible, code breaks before can run
     });
     test("returns false, when tetromino with 0 value leaves stage", () => {
       const player: Player = {
