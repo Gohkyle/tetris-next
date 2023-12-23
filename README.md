@@ -42,3 +42,12 @@ https://blog.hubspot.com/website/center-div-css
 https://makeschool.org/mediabook/oa/tutorials/react-redux-tetris-app-tutorial-o4s/tetris-introduction/
 
 https://www.youtube.com/watch?v=ZGOaCxX8HIU
+
+to do:
+change variables names of movement
+maybe relook at checkCollision situations
+
+drop player
+rotate player
+gameover limits set
+next block.queue
