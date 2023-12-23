@@ -20,8 +20,8 @@ interface IProps {
 }
 
 export const Tetris = () => {
-  const [player, movePlayer, resetPlayer] = usePlayer();
-  const [stage, setStage] = useStage(player);
+  const [player, updatePlayer, resetPlayer] = usePlayer();
+  const [stage, setStage] = useStage(player, resetPlayer);
   const [nextBlock, setNextBlock] = useState<Shape[][]>([[0]]);
 
   // const [isGameOver, setIsGameOver] = useState(false);
@@ -35,7 +35,7 @@ export const Tetris = () => {
     // }
     if (keyCode === 37) {
       if (!checkCollision(player,stage, moveLeft)){
-        movePlayer(moveLeft) 
+        updatePlayer(moveLeft) 
       } 
         
       // } 
@@ -45,14 +45,15 @@ export const Tetris = () => {
     // }
     if (keyCode === 39) {
       if(!checkCollision(player,stage,moveRight)){
-        movePlayer(moveRight);
+        updatePlayer(moveRight);
       }
 
     }
     if (keyCode === 40) {
       if (!checkCollision(player, stage, moveDown)){
-        movePlayer(moveDown);
+        updatePlayer(moveDown);
       }
+      else updatePlayer({x:0, y:0, hasCollided:true})
     }
     
     // if (keyCode === 32) {
