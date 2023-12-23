@@ -295,6 +295,7 @@ describe("checkCollision()", () => {
       expect(checkCollision(player, stage, movement)).toBe(true);
     });
     test("returns true, when tetromino y-movement leaves stage", () => {
+      //not possible, code breaks before can run
     });
     test("returns false, when tetromino with 0 value leaves stage", () => {
       const player: Player = {
