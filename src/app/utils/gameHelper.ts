@@ -22,7 +22,7 @@ export const updateStage = (prevStage: SquareObject[][], player: Player) => {
       }
     });
   });
-  
+
   return newStage;
 };
 
