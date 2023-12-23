@@ -68,6 +68,22 @@ describe("updateStage()", () => {
     expect(updatedStage[1][0]).toEqual({type:"O", dropped: false});
     expect(updatedStage[1][1]).toEqual({type:"O", dropped: false});
   });
+  test("updates the square's dropped property, if a movement has Collided ", () => {
+    const prevStage: SquareObject[][] = createStage();
+    const player: Player = {
+      currTetro: [
+        ["O", "O"],
+        ["O", "O"],
+      ],
+      position: { x: 0, y: 18 },
+      hasCollided: true,
+    };
+
+    expect(updateStage(prevStage, player)[18][0]).toEqual({type: "O", dropped: true})
+    expect(updateStage(prevStage, player)[18][1]).toEqual({type: "O", dropped: true})
+    expect(updateStage(prevStage, player)[19][0]).toEqual({type: "O", dropped: true})
+    expect(updateStage(prevStage, player)[19][1]).toEqual({type: "O", dropped: true})
+  })
   test("returns a new array", () => {
     const prevStage: SquareObject[][] = createStage();
     const player: Player = {
@@ -90,7 +106,7 @@ describe("updateStage()", () => {
     expect(prevStage).toEqual(copyPrevStage);
   });
 });
-describe("updatePlayerPos", () => {
+describe("updatePlayerPos()", () => {
   test("returns player object with player position x value updated", () => {
     const player: Player = {
       currTetro: [[0]],
@@ -176,7 +192,7 @@ describe("checkCollision()", () => {
 
     expect(checkCollision(player, stage, movement)).toBe(false);
   });
-  test("returns false, for allowed movement", () =>{
+  test("returns false, for no collision movement", () =>{
     const player :Player = {
       currTetro: [
         ["O", "O"],
@@ -185,7 +201,7 @@ describe("checkCollision()", () => {
       position: { x: 4, y: 0 },
       hasCollided: false,
     };
-    const stage = updateStage(createStage, player)
+    const stage = updateStage(createStage(), player)
     const movementR= { x: 1, y: 0 };
     const movementL= { x: -1, y: 0 };
     const movementD= { x: 0, y: 1 };
@@ -196,7 +212,7 @@ describe("checkCollision()", () => {
   })
   describe("x-direction", () => {
     test("returns true, when player position leaves stage", () => {
-      const player = {
+      const player:Player = {
         currTetro: [
           ["O", "O"],
           ["O", "O"],
@@ -204,13 +220,13 @@ describe("checkCollision()", () => {
         position: { x: 9, y: 0 },
         hasCollided: false,
       };
-      const stage = createStage();
+      const stage = updateStage(createStage(), player);
       const movement = { x: 1, y: 0 };
 
       expect(checkCollision(player, stage, movement)).toBe(true);
     });
     test("returns true, when player tetromino with no 0 values leaves stage", () => {
-      const player = {
+      const player:Player = {
         currTetro: [
           ["O", "O"],
           ["O", "O"],
@@ -218,7 +234,7 @@ describe("checkCollision()", () => {
         position: { x: 8, y: 0 },
         hasCollided: false,
       };
-      const stage = createStage();
+      const stage = updateStage(createStage(), player);
       const movement = { x: 1, y: 0 };
 
       expect(checkCollision(player, stage, movement)).toBe(true);
@@ -233,21 +249,21 @@ describe("checkCollision()", () => {
         position: { x: 7, y: 0 },
         hasCollided: false,
       };
-      const stage = createStage();
+      const stage = updateStage(createStage(), player);
       const movement = { x: 1, y: 0 };
       expect(checkCollision(player, stage, movement)).toBe(false);
     });
     test("returns true, when player position is about to move onto an occupied square", () => {
-      const player = {
+      const player: Player = {
         currTetro: [
           [0, "J", 0],
           [0, "J", 0],
           ["J", "J", 0],
         ],
         position: { x: 5, y: 0 },
-        hasCollided: false,
+        hasCollided: true,
       };
-      const stage = createStage();
+      const stage = updateStage(createStage(), player);
       const movement = { x: 1, y: 0 };
 
       const previousPlayerMovement: Player = {
@@ -265,7 +281,7 @@ describe("checkCollision()", () => {
   });
   describe("y-movement", () => {
     test("returns true, when player y-movement leaves stage", () => {
-      const player = {
+      const player: Player = {
         currTetro: [
           ["O", "O"],
           ["O", "O"],
@@ -273,26 +289,15 @@ describe("checkCollision()", () => {
         position: { x: 0, y: 19 },
         hasCollided: false,
       };
-      const stage = createStage();
+      const stage = updateStage(createStage(), player);
       const movement = { x: 0, y: 1 };
 
       expect(checkCollision(player, stage, movement)).toBe(true);
     });
     test("returns true, when tetromino y-movement leaves stage", () => {
-      const player = {
-        currTetro: [
-          ["O", "O"],
-          ["O", "O"],
-        ],
-        position: { x: 0, y: 18 },
-        hasCollided: false,
-      };
-      const stage = createStage();
-      const movement = { x: 0, y: 1 };
-      expect(checkCollision(player, stage, movement)).toBe(true);
     });
     test("returns false, when tetromino with 0 value leaves stage", () => {
-      const player = {
+      const player: Player = {
         currTetro: [
           ["Z", "Z", 0],
           [0, "Z", "Z"],
@@ -301,13 +306,13 @@ describe("checkCollision()", () => {
         position: { x: 0, y: 17 },
         hasCollided: false,
       };
-      const stage = createStage();
+      const stage = updateStage(createStage(), player);
       const movement = { x: 0, y: 1 };
 
       expect(checkCollision(player, stage, movement)).toBe(false);
     });
     test("returns true, when player position is about to move onto an occupied square", () => {
-      const player = {
+      const player: Player = {
         currTetro: [
           [0, "J", 0],
           [0, "J", 0],
@@ -316,7 +321,7 @@ describe("checkCollision()", () => {
         position: { x: 0, y: 4 },
         hasCollided: false,
       };
-      const stage = createStage();
+      const stage = updateStage(createStage(), player);
       const movement = { x: 0, y: 1 };
 
       const previousPlayerMovement: Player = {

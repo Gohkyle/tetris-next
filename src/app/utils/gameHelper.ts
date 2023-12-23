@@ -17,8 +17,8 @@ export const updateStage = (prevStage: SquareObject[][], player: Player) => {
   player.currTetro.forEach((row: Shape[], y: number) => {
     return row.forEach((square: Shape, x: number) => {
       if (square !== 0) {
-        return (newStage[y + player.position.y][x + player.position.x] =
-          {type:square, dropped: false});
+        return newStage[y + player.position.y][x + player.position.x] =
+           {type:square, dropped: (player.hasCollided) ? true : false}
       }
     });
   });
@@ -50,13 +50,12 @@ export const checkCollision = (
         ) {
           return true;
         }
-        // if (
-        //   stage[player.position.y + movement.y + i][
-        //     player.position.x + movement.x + j
-        //   ] !== 0
-        // ) {
-        //   return true;
-        // }
+        if (
+          stage[player.position.y + movement.y + i][
+            player.position.x + movement.x + j].dropped === true 
+        ) {
+          return true;
+        }
       }
     }
   }
