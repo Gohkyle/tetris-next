@@ -27,33 +27,33 @@ export const Tetris = () => {
   // const [isGameOver, setIsGameOver] = useState(false);
 
   const handleButtonPress = ({ keyCode }: IProps) => {
+    const moveLeft: Movement={x:-1, y:0, hasCollided: false}
+    const moveRight: Movement={x:1, y:0, hasCollided: false}
+    const moveDown: Movement={x:0, y:1, hasCollided: false}
     // if(keyCode===27){
 
     // }
     if (keyCode === 37) {
-      const moveLeft: Movement = { x: -1, y: 0, hasCollided: false }
-      const collisionStatus = checkCollision(player, stage, {x:moveLeft.x, y:0})
-      console.log(collisionStatus)
-        movePlayer(moveLeft);
+      if (!checkCollision(player,stage, moveLeft)){
+        movePlayer(moveLeft) 
+      } 
+        
       // } 
     }
     // if (keyCode===38){
     //   rotatePlayer()
     // }
     if (keyCode === 39) {
-      const moveRight = { x: 1, y: 0, hasCollided: false }
-      
-      const collisionStatus = checkCollision(player, stage, {x:moveRight.x, y:0})
-      console.log(collisionStatus)
+      if(!checkCollision(player,stage,moveRight)){
         movePlayer(moveRight);
+      }
 
     }
     if (keyCode === 40) {
-      const moveDown = { x: 0, y: 1, hasCollided: false }
-      const collisionStatus = checkCollision(player, stage, {x:0, y:moveDown.y})
-      console.log(collisionStatus)
+      if (!checkCollision(player, stage, moveDown)){
         movePlayer(moveDown);
-      } 
+      }
+    }
     
     // if (keyCode === 32) {
     //   dropPlayer();
