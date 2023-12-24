@@ -1,5 +1,5 @@
 import { Movement, Player, Shape, SquareObject } from "@/app/types";
-import { columns, rows, updatePlayerObj, updateStage } from "../gameHelper";
+import { columns, rotate, rows, updatePlayerObj, updateStage } from "../gameHelper";
 import { randomTetromino } from "../../tetrominos";
 
 const { checkCollision, createStage } = require("../gameHelper");
@@ -338,3 +338,51 @@ describe("checkCollision()", () => {
     });
   });
 });
+
+describe("rotate()", () => {
+
+  const tetroL: Shape [][]=[
+    ["L", 0, 0],
+    ["L", 0, 0],
+    ["L", "L", 0],
+  ]
+  const tetroL2: Shape[][] = 
+  [
+    ["L", "L", "L"],
+    ["L", 0, 0],
+    [0, 0, 0],
+  ]
+  const tetroL3: Shape[][] = 
+  [
+    [0, "L", "L"],
+    [0, 0, "L"],
+    [0, 0, "L"],
+  ]
+  const tetroL4:Shape[][] = 
+  [
+    [0, 0, 0],
+    [0, 0, "L"],
+    ["L", "L", "L"],
+  ]
+
+
+  test("returns the array transposed and rows reversed ", () => {
+    console.log(rotate(tetroL))
+    expect(rotate(tetroL)).toEqual(tetroL2)
+    expect(rotate(tetroL2)).toEqual(tetroL3)
+    expect(rotate(tetroL3)).toEqual(tetroL4)
+    expect(rotate(tetroL4)).toEqual(tetroL)
+  })
+  test("returns a new array",()=>{
+    expect(rotate(tetroL)).not.toEqual(tetroL)
+  })
+  test("does not mutate original array", () =>{
+    const copyTetroL: Shape [][]=[
+      ["L", 0, 0],
+      ["L", 0, 0],
+      ["L", "L", 0],
+    ]
+    rotate(tetroL)
+    expect(tetroL).toEqual(copyTetroL)
+  })
+})

@@ -61,3 +61,11 @@ export const checkCollision = (
   }
   return false;
 };
+
+export const rotate = (matrix:Shape[][]) :Shape [][]=> {
+  const transposed =  matrix.map((row:Shape[], index:number)=>{
+    return matrix.map((row:Shape[])=> row[index])
+  })
+
+  return transposed.map((row:Shape[])=>row.reverse())
+}
