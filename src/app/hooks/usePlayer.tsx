@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { columns, updatePlayerObj } from "../utils/gameHelper";
+import { columns, rotate, updatePlayerPos } from "../utils/gameHelper";
 import { randomTetromino } from "../tetrominos";
 import { Movement, Player } from "../types";
 
@@ -11,7 +11,12 @@ export const usePlayer = () => {
     })
     
     const updatePlayer = (movement: Movement) => {
-        setPlayer((prevPlayer)=> updatePlayerObj(prevPlayer, movement))
+        setPlayer((prevPlayer)=> updatePlayerPos(prevPlayer, movement))
+    }
+
+    const rotatePlayer = () => {
+        setPlayer((prevPlayer) => {
+            return {...prevPlayer, currTetro: rotate(prevPlayer.currTetro)}})
     }
 
     const resetPlayer = useCallback(()=>{
@@ -23,5 +28,5 @@ export const usePlayer = () => {
         })
     }, [])
     
-    return [player, updatePlayer, resetPlayer] as const
+    return [player, updatePlayer, resetPlayer, rotatePlayer] as const
 }
