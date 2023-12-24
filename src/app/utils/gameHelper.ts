@@ -26,7 +26,7 @@ export const updateStage = (prevStage: SquareObject[][], player: Player) => {
   return newStage;
 };
 
-export const updatePlayerObj = (player: Player, {x, y, hasCollided}:Movement)=> {
+export const updatePlayerPos = (player: Player, {x, y, hasCollided}:Movement)=> {
   return {...player,
   position:{x: player.position.x + x, y:player.position.y + y}, 
   hasCollided
@@ -69,3 +69,7 @@ export const rotate = (matrix:Shape[][]) :Shape [][]=> {
 
   return transposed.map((row:Shape[])=>row.reverse())
 }
+
+// export const rotatePlayer = (player: Player) => {
+//   return "nei hou"
+// }
