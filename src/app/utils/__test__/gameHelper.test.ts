@@ -365,7 +365,6 @@ describe("rotate()", () => {
   ]
 
   test("returns the array transposed and rows reversed ", () => {
-    console.log(rotate(tetroL))
     expect(rotate(tetroL)).toEqual(tetroL2)
     expect(rotate(tetroL2)).toEqual(tetroL3)
     expect(rotate(tetroL3)).toEqual(tetroL4)
@@ -379,17 +378,8 @@ describe("rotate()", () => {
       ["L", 0, 0],
       ["L", 0, 0],
       ["L", "L", 0],
-    ]
-    rotate(tetroL)
-    expect(tetroL).toEqual(copyTetroL)
-  })
-})
-describe("rotatePlayer()", ()=>{
-  test("updates player object currTetro property with has been rotated", () => {
-
-  })
-  test("returns a new object", ()=>{
-
-  })
-  test("does not mutate original object")
+    ];
+    rotate(tetroL);
+    expect(tetroL).toEqual(copyTetroL);
+  }) 
 })
