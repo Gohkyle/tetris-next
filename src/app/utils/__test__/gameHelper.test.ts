@@ -1,5 +1,12 @@
 import { Movement, Player, Shape, SquareObject } from "@/app/types";
-import { columns, rotate, rows, updatePlayerPos, updateStage } from "../gameHelper";
+import {
+  clearRows,
+  columns,
+  rotate,
+  rows,
+  updatePlayerPos,
+  updateStage,
+} from "../gameHelper";
 import { randomTetromino } from "../../tetrominos";
 
 const { checkCollision, createStage } = require("../gameHelper");
@@ -16,10 +23,10 @@ describe("createStage()", () => {
     expect(createStage()[0]).toHaveLength(columns);
   });
   test("returns an array, of arrays of only {type:0, dropped: false}", () => {
-    expect(createStage().flat()).toContainEqual({type:0, dropped: false});
+    expect(createStage().flat()).toContainEqual({ type: 0, dropped: false });
 
     createStage().forEach((row: []) => {
-      row.forEach(({type, dropped}) => {
+      row.forEach(({ type, dropped }) => {
         expect(type).toBe(0);
         expect(dropped).toBe(false);
       });
@@ -49,7 +56,7 @@ describe("updateStage()", () => {
 
     expect(
       updateStage(prevStage, player)[player.position.y][player.position.x]
-    ).toEqual({type: "O", dropped: false});
+    ).toEqual({ type: "O", dropped: false });
   });
   test("updates stage with the entire tetromino", () => {
     const prevStage: SquareObject[][] = createStage();
@@ -63,10 +70,10 @@ describe("updateStage()", () => {
     };
 
     const updatedStage = updateStage(prevStage, player);
-    expect(updatedStage[0][0]).toEqual({type:"O", dropped: false});
-    expect(updatedStage[0][1]).toEqual({type:"O", dropped: false});
-    expect(updatedStage[1][0]).toEqual({type:"O", dropped: false});
-    expect(updatedStage[1][1]).toEqual({type:"O", dropped: false});
+    expect(updatedStage[0][0]).toEqual({ type: "O", dropped: false });
+    expect(updatedStage[0][1]).toEqual({ type: "O", dropped: false });
+    expect(updatedStage[1][0]).toEqual({ type: "O", dropped: false });
+    expect(updatedStage[1][1]).toEqual({ type: "O", dropped: false });
   });
   test("updates the square's dropped property, if a movement has Collided ", () => {
     const prevStage: SquareObject[][] = createStage();
@@ -79,11 +86,23 @@ describe("updateStage()", () => {
       hasCollided: true,
     };
 
-    expect(updateStage(prevStage, player)[18][0]).toEqual({type: "O", dropped: true})
-    expect(updateStage(prevStage, player)[18][1]).toEqual({type: "O", dropped: true})
-    expect(updateStage(prevStage, player)[19][0]).toEqual({type: "O", dropped: true})
-    expect(updateStage(prevStage, player)[19][1]).toEqual({type: "O", dropped: true})
-  })
+    expect(updateStage(prevStage, player)[18][0]).toEqual({
+      type: "O",
+      dropped: true,
+    });
+    expect(updateStage(prevStage, player)[18][1]).toEqual({
+      type: "O",
+      dropped: true,
+    });
+    expect(updateStage(prevStage, player)[19][0]).toEqual({
+      type: "O",
+      dropped: true,
+    });
+    expect(updateStage(prevStage, player)[19][1]).toEqual({
+      type: "O",
+      dropped: true,
+    });
+  });
   test("returns a new array", () => {
     const prevStage: SquareObject[][] = createStage();
     const player: Player = {
@@ -147,8 +166,8 @@ describe("updatePlayerPos()", () => {
       position: { x: 0, y: 1 },
       hasCollided: true,
     };
-    expect(updatePlayerPos(player,movement)).toEqual(updatedPlayer)
-  })
+    expect(updatePlayerPos(player, movement)).toEqual(updatedPlayer);
+  });
   test("returns a new object", () => {
     const player: Player = {
       currTetro: [[0]],
@@ -156,8 +175,8 @@ describe("updatePlayerPos()", () => {
       hasCollided: false,
     };
     const movement: Movement = { x: 0, y: 1, hasCollided: false };
-   
-    expect(updatePlayerPos(player,movement)).not.toEqual(player)
+
+    expect(updatePlayerPos(player, movement)).not.toEqual(player);
   });
   test("does not mutate original object", () => {
     const player: Player = {
@@ -165,16 +184,16 @@ describe("updatePlayerPos()", () => {
       position: { x: 0, y: 0 },
       hasCollided: false,
     };
-  const copyPlayer: Player = {
+    const copyPlayer: Player = {
       currTetro: [[0]],
       position: { x: 0, y: 0 },
       hasCollided: false,
     };
-  
+
     const movement: Movement = { x: 0, y: 1, hasCollided: false };
 
-  updatePlayerPos(player,movement)
-  expect(player).toEqual(copyPlayer)
+    updatePlayerPos(player, movement);
+    expect(player).toEqual(copyPlayer);
   });
 });
 describe("checkCollision()", () => {
@@ -192,8 +211,8 @@ describe("checkCollision()", () => {
 
     expect(checkCollision(player, stage, movement)).toBe(false);
   });
-  test("returns false, for no collision movement", () =>{
-    const player :Player = {
+  test("returns false, for no collision movement", () => {
+    const player: Player = {
       currTetro: [
         ["O", "O"],
         ["O", "O"],
@@ -201,18 +220,18 @@ describe("checkCollision()", () => {
       position: { x: 4, y: 0 },
       hasCollided: false,
     };
-    const stage = updateStage(createStage(), player)
-    const movementR= { x: 1, y: 0 };
-    const movementL= { x: -1, y: 0 };
-    const movementD= { x: 0, y: 1 };
+    const stage = updateStage(createStage(), player);
+    const movementR = { x: 1, y: 0 };
+    const movementL = { x: -1, y: 0 };
+    const movementD = { x: 0, y: 1 };
 
     expect(checkCollision(player, stage, movementR)).toBe(false);
     expect(checkCollision(player, stage, movementL)).toBe(false);
     expect(checkCollision(player, stage, movementD)).toBe(false);
-  })
+  });
   describe("x-direction", () => {
     test("returns true, when player position leaves stage", () => {
-      const player:Player = {
+      const player: Player = {
         currTetro: [
           ["O", "O"],
           ["O", "O"],
@@ -226,7 +245,7 @@ describe("checkCollision()", () => {
       expect(checkCollision(player, stage, movement)).toBe(true);
     });
     test("returns true, when player tetromino with no 0 values leaves stage", () => {
-      const player:Player = {
+      const player: Player = {
         currTetro: [
           ["O", "O"],
           ["O", "O"],
@@ -281,7 +300,7 @@ describe("checkCollision()", () => {
   });
   describe("y-movement", () => {
     test("returns true, when player y-movement leaves stage", () => {
-     // not possible
+      // not possible
     });
     test("returns true, when tetromino y-movement leaves stage", () => {
       const player: Player = {
@@ -340,46 +359,138 @@ describe("checkCollision()", () => {
 });
 
 describe("rotate()", () => {
-  const tetroL: Shape [][]=[
+  const tetroL: Shape[][] = [
     ["L", 0, 0],
     ["L", 0, 0],
     ["L", "L", 0],
-  ]
-  const tetroL2: Shape[][] = 
-  [
+  ];
+  const tetroL2: Shape[][] = [
     ["L", "L", "L"],
     ["L", 0, 0],
     [0, 0, 0],
-  ]
-  const tetroL3: Shape[][] = 
-  [
+  ];
+  const tetroL3: Shape[][] = [
     [0, "L", "L"],
     [0, 0, "L"],
     [0, 0, "L"],
-  ]
-  const tetroL4:Shape[][] = 
-  [
+  ];
+  const tetroL4: Shape[][] = [
     [0, 0, 0],
     [0, 0, "L"],
     ["L", "L", "L"],
-  ]
+  ];
 
   test("returns the array transposed and rows reversed ", () => {
-    expect(rotate(tetroL)).toEqual(tetroL2)
-    expect(rotate(tetroL2)).toEqual(tetroL3)
-    expect(rotate(tetroL3)).toEqual(tetroL4)
-    expect(rotate(tetroL4)).toEqual(tetroL)
-  })
-  test("returns a new array",()=>{
-    expect(rotate(tetroL)).not.toEqual(tetroL)
-  })
-  test("does not mutate original array", () =>{
-    const copyTetroL: Shape [][]=[
+    expect(rotate(tetroL)).toEqual(tetroL2);
+    expect(rotate(tetroL2)).toEqual(tetroL3);
+    expect(rotate(tetroL3)).toEqual(tetroL4);
+    expect(rotate(tetroL4)).toEqual(tetroL);
+  });
+  test("returns a new array", () => {
+    expect(rotate(tetroL)).not.toEqual(tetroL);
+  });
+  test("does not mutate original array", () => {
+    const copyTetroL: Shape[][] = [
       ["L", 0, 0],
       ["L", 0, 0],
       ["L", "L", 0],
     ];
     rotate(tetroL);
     expect(tetroL).toEqual(copyTetroL);
-  }) 
-})
+  });
+});
+describe("clearRows()", () => {
+  test("takes an array, and removes row with every value has type not 0, adds a new empty row for every removed row", () => {
+    const mockStage: SquareObject[][] = [
+      [
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+      ],
+      [
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+        { type: "O", dropped: true },
+        { type: "O", dropped: true },
+      ],
+    ];
+    const clearedMockStage: SquareObject[][] = [
+      [
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+      ],
+      [
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+      ],
+      
+    ];
+
+    expect(clearRows(mockStage)).toEqual(clearedMockStage)
+  });
+  test("returns a new array", () => { 
+    const mockStage: SquareObject[][] = [
+    [
+      { type: 0, dropped: false },
+      { type: 0, dropped: false },
+      { type: 0, dropped: false },
+      { type: 0, dropped: false },
+      { type: 0, dropped: false },
+    ],
+    [
+      { type: "L", dropped: true },
+      { type: "L", dropped: true },
+      { type: "L", dropped: true },
+      { type: "O", dropped: true },
+      { type: "O", dropped: true },
+    ],
+  ];
+  expect(clearRows(mockStage)).not.toEqual(mockStage)
+  })
+  test("does not mutate original array", () =>{
+    const mockStage: SquareObject[][] = [
+      [
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+      ],
+      [
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+        { type: "O", dropped: true },
+        { type: "O", dropped: true },
+      ],
+    ];
+    const copyMockStage: SquareObject[][] = [
+      [
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+      ],
+      [
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+        { type: "O", dropped: true },
+        { type: "O", dropped: true },
+      ],
+    ];
+    clearRows(mockStage)
+
+    expect(mockStage).toEqual(copyMockStage)
+  })
+});
