@@ -69,7 +69,3 @@ export const rotate = (matrix:Shape[][]) :Shape [][]=> {
 
   return transposed.map((row:Shape[])=>row.reverse())
 }
-
-// export const rotatePlayer = (player: Player) => {
-//   return "nei hou"
-// }
