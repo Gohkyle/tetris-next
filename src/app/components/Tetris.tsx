@@ -41,7 +41,7 @@ export const Tetris = () => {
       // } 
     }
     if (keyCode===38){
-      rotatePlayer()
+      rotatePlayer(stage)
     }
     if (keyCode === 39) {
       if(!checkCollision(player,stage,moveRight)){
