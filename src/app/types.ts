@@ -18,6 +18,6 @@ export interface Position{
 
 export interface Movement{
     x: number,
-    y:number,
+    y: number,
     hasCollided: boolean
 }
