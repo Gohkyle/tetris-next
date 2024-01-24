@@ -10,10 +10,11 @@ import { Display } from "./Display";
 import { useStage } from "../hooks/useStage";
 import { usePlayer } from "../hooks/usePlayer";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Movement, Shape } from "../types";
 import { checkCollision, createStage } from "../utils/gameHelper";
+import { useInterval } from "../hooks/useInterval";
 
 interface IProps {
   keyCode: number;
@@ -23,39 +24,41 @@ export const Tetris = () => {
   const [player, updatePlayer, resetPlayer, rotatePlayer] = usePlayer();
   const [stage, setStage] = useStage(player, resetPlayer);
   const [nextBlock, setNextBlock] = useState<Shape[][]>([[0]]);
+  const [dropTimer, setDropTimer] = useState<number>(0);
 
   // const [isGameOver, setIsGameOver] = useState(false);
 
+  const movePlayer = (x: number) => {
+    const movement: Movement = { x, y:0, hasCollided: false };
+    if (!checkCollision(player, stage, movement)) {
+      updatePlayer(movement);
+    }
+  };
+   
+  const drop = () =>{
+    const movement: Movement = { x:0, y:1, hasCollided: false }
+    if (!checkCollision(player, stage, movement)) {
+      updatePlayer(movement);
+    } else updatePlayer({ x: 0, y: 0, hasCollided: true });
+  }
+
   const handleButtonPress = ({ keyCode }: IProps) => {
-    const moveLeft: Movement={x:-1, y:0, hasCollided: false}
-    const moveRight: Movement={x:1, y:0, hasCollided: false}
-    const moveDown: Movement={x:0, y:1, hasCollided: false}
     // if(keyCode===27){
 
     // }
     if (keyCode === 37) {
-      if (!checkCollision(player,stage, moveLeft)){
-        updatePlayer(moveLeft) 
-      } 
-        
-      // } 
+      movePlayer(-1);
     }
-    if (keyCode===38){
-      rotatePlayer(stage)
+    if (keyCode === 38) {
+      rotatePlayer(stage);
     }
     if (keyCode === 39) {
-      if(!checkCollision(player,stage,moveRight)){
-        updatePlayer(moveRight);
-      }
-
+      movePlayer(1);
     }
     if (keyCode === 40) {
-      if (!checkCollision(player, stage, moveDown)){
-        updatePlayer(moveDown);
-      }
-      else updatePlayer({x:0, y:0, hasCollided:true})
+      drop()
     }
-    
+
     // if (keyCode === 32) {
     //   dropPlayer();
     // }
@@ -63,9 +66,13 @@ export const Tetris = () => {
 
   const startGame = () => {
     setStage(createStage());
+    setDropTimer(1000);
     resetPlayer();
   };
 
+  useInterval(() => {
+    drop();
+  }, dropTimer);
 
   return (
     <StyledTetris role="button" tabIndex={0} onKeyUp={handleButtonPress}>
