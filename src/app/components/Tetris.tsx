@@ -30,31 +30,36 @@ export const Tetris = () => {
   const tetrisBoard = useRef<HTMLDivElement>(null)
 
   const movePlayer = (x: number) => {
-    const movement: Movement = { x, y: 0, hasCollided: false };
-    if (!checkCollision(player, stage, movement)) {
-      updatePlayer(movement);
+    if (!isGameOver){
+      const movement: Movement = { x, y: 0, hasCollided: false };
+      if (!checkCollision(player, stage, movement)) {
+        updatePlayer(movement);
+      }
     }
   };
-
   const softDrop = () => {
-    const movement: Movement = { x: 0, y: 1, hasCollided: false };
-    if (!checkCollision(player, stage, movement)) {
-      updatePlayer(movement);
-    } else updatePlayer({ x: 0, y: 0, hasCollided: true });
+    if (!isGameOver){
+
+      const movement: Movement = { x: 0, y: 1, hasCollided: false };
+      if (!checkCollision(player, stage, movement)) {
+        updatePlayer(movement);
+      } else updatePlayer({ x: 0, y: 0, hasCollided: true });
+    }
   };
   const hardDrop = () => {
-    for (let i = 0; i < rows; i++) {
-      const movement: Movement = { x: 0, y: i, hasCollided: false };
-      if (checkCollision(player, stage, movement)) {
-        updatePlayer({ x: 0, y: i - 1, hasCollided: true });
-        return i - 1;
+    if(!isGameOver){
+      for (let i = 0; i < rows; i++) {
+        const movement: Movement = { x: 0, y: i, hasCollided: false };
+        if (checkCollision(player, stage, movement)) {
+          updatePlayer({ x: 0, y: i - 1, hasCollided: true });
+          return i - 1;
+        }
       }
     }
   };
 
   const handleButtonPress = ({ keyCode }: IProps) => {
     // if(keyCode===27){
-
     // }
     if (keyCode === 37) {
       movePlayer(-1);
@@ -95,7 +100,7 @@ export const Tetris = () => {
         <Display text="score" />
         <Display text="level" />
       </aside>
-      {isGameOver? <MessageModal title="title" text="text" startGame={startGame} /> : null}
+      {isGameOver? <MessageModal title="GAME OVER" text="text" startGame={startGame}/> : null}
     </StyledTetris>
   );
 };
