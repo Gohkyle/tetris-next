@@ -40,3 +40,4 @@ https://www.youtube.com/watch?v=ZGOaCxX8HIU
 - drop player
 - gameover limits set
 - next block queue
+- check the movement, updatePlayerpos, updateplayer, fucntions hascollided may be able to be omitted
