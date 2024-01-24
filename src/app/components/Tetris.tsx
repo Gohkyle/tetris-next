@@ -9,6 +9,7 @@ import { Display } from "./Display";
 
 import { useStage } from "../hooks/useStage";
 import { usePlayer } from "../hooks/usePlayer";
+import{ useStatus } from "../hooks/useStatus"
 
 import { useState, useRef } from "react";
 
@@ -25,9 +26,9 @@ export const Tetris = () => {
   const [isGameOver, setIsGameOver] = useState<boolean>(true);
   const [nextBlock, setNextBlock] = useState<Shape[][]>(randomTetromino())
   const [player, updatePlayer, resetPlayer, rotatePlayer] = usePlayer(nextBlock, setNextBlock);
-  const [stage, setStage] = useStage(player, resetPlayer, nextBlock, setIsGameOver);
+  const [stage, setStage, rowsCleared] = useStage(player, resetPlayer, nextBlock, setIsGameOver);
   const [dropTimer, setDropTimer] = useState<number>(0);
-
+  const [level, setLevel, score,setScore, totalRows, setTotalRows, calcScore] = useStatus(isGameOver, rowsCleared)
   const tetrisBoard = useRef<HTMLDivElement>(null)
 
   const movePlayer = (x: number) => {
@@ -39,8 +40,12 @@ export const Tetris = () => {
     }
   };
   const softDrop = () => {
+    if (totalRows===2){
+      setLevel((prevLevel)=> prevLevel++)
+      setTotalRows(0)
+      setDropTimer((prev)=> prev+=1000)
+    }
     if (!isGameOver){
-
       const movement: Movement = { x: 0, y: 1, hasCollided: false };
       if (!checkCollision(player, stage, movement)) {
         updatePlayer(movement);
@@ -84,6 +89,9 @@ export const Tetris = () => {
     tetrisBoard.current?.focus()
     setIsGameOver(false);
     setStage(createStage());
+    setScore(0);
+    setLevel(0);
+    setTotalRows(0)
     setDropTimer(1000);
     resetPlayer();
   };
@@ -97,8 +105,9 @@ export const Tetris = () => {
       <Stage stage={stage} />
       <aside>
         <NextBlock nextBlock={nextBlock} />
-        <Display text="score" />
-        <Display text="level" />
+        <Display text={`score: ${score}`} />
+        <Display text={`level: ${level}`} />
+        <Display text={`rows: ${totalRows}`} />
       </aside>
       {isGameOver? <MessageModal title="GAME OVER" text="text" startGame={startGame}/> : null}
     </StyledTetris>
