@@ -38,3 +38,21 @@ https://www.youtube.com/watch?v=ZGOaCxX8HIU
 - check the movement, updatePlayerpos, updateplayer, fucntions hascollided may be able to be omitted
 - make the viewport more dynamic
 - make press and hold features
+
+Single 100 × level
+Double 300 × level
+Triple 500 × level
+Tetris 800 × level; difficult
+Mini T-Spin no line(s) 100 × level
+T-Spin no line(s) 400 × level
+Mini T-Spin Single 200 × level; difficult
+T-Spin Single 800 × level; difficult
+Mini T-Spin Double (if present) 400 × level; difficult
+T-Spin Double 1200 × level; difficult
+T-Spin Triple 1600 × level; difficult
+Back-to-Back difficult line clears Action score × 1.5 (excluding soft drop and hard drop)
+Combo 50 × combo count × level
+Soft drop 1 per cell
+Hard drop 2 per cell
+
+10 lines cleared level +1
