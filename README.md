@@ -33,11 +33,8 @@ https://www.youtube.com/watch?v=ZGOaCxX8HIU
 - Change variables names of movement
 - relook at checkCollision situations
 - edit the updateplayerobj/updateplayer to take hascollided as an optional argument? parameter
-- extract rotateplayer as a gamehelper and test it
-- rotate debuggin
-- rotation forced in position
-- rotation blocked when no
-- drop player
 - gameover limits set
 - next block queue
 - check the movement, updatePlayerpos, updateplayer, fucntions hascollided may be able to be omitted
+- make the viewport more dynamic
+- make press and hold features
