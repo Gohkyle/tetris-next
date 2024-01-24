@@ -432,31 +432,30 @@ describe("clearRows()", () => {
         { type: 0, dropped: false },
         { type: 0, dropped: false },
       ],
-      
     ];
 
-    expect(clearRows(mockStage)[0]).toEqual(clearedMockStage)
+    expect(clearRows(mockStage)[0]).toEqual(clearedMockStage);
   });
-  test("returns a new array", () => { 
+  test("returns a new array", () => {
     const mockStage: SquareObject[][] = [
-    [
-      { type: 0, dropped: false },
-      { type: 0, dropped: false },
-      { type: 0, dropped: false },
-      { type: 0, dropped: false },
-      { type: 0, dropped: false },
-    ],
-    [
-      { type: "L", dropped: true },
-      { type: "L", dropped: true },
-      { type: "L", dropped: true },
-      { type: "O", dropped: true },
-      { type: "O", dropped: true },
-    ],
-  ];
-  expect(clearRows(mockStage)).not.toEqual(mockStage)
-  })
-  test("does not mutate original array", () =>{
+      [
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+      ],
+      [
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+        { type: "O", dropped: true },
+        { type: "O", dropped: true },
+      ],
+    ];
+    expect(clearRows(mockStage)).not.toEqual(mockStage);
+  });
+  test("does not mutate original array", () => {
     const mockStage: SquareObject[][] = [
       [
         { type: 0, dropped: false },
@@ -489,8 +488,28 @@ describe("clearRows()", () => {
         { type: "O", dropped: true },
       ],
     ];
-    clearRows(mockStage)
+    clearRows(mockStage);
 
-    expect(mockStage).toEqual(copyMockStage)
-  })
+    expect(mockStage).toEqual(copyMockStage);
+  });
+  test("the second property of the array returns the rows cleared in that instance of the stage", () => {
+    const babyStage:SquareObject[][] = [
+      [
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+        { type: 0, dropped: false },
+      ],
+      [
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+        { type: "L", dropped: true },
+      ],
+      [
+        { type: "O", dropped: true },
+        { type: "O", dropped: true },
+        { type: "O", dropped: true },
+      ],
+    ];
+    expect(clearRows(babyStage)[1]).toBe(2)
+  });
 });

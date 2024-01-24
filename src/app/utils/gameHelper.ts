@@ -75,9 +75,11 @@ export const rotate = (matrix:Shape[][]) :Shape [][]=> {
 }
 
 export const clearRows = (stage: SquareObject[][]):stageArr => {
-  return [stage.reduce(
+  let rowsCleared = 0
+  const stageCleared = stage.reduce(
     (acc: SquareObject[][], row: SquareObject[]): SquareObject[][] => {
       if (row.findIndex((cell) => cell.type === 0) === -1) {
+        rowsCleared++
         acc.unshift(new Array(row.length).fill({ type: 0, dropped: false }));
         return acc;
       }
@@ -85,5 +87,6 @@ export const clearRows = (stage: SquareObject[][]):stageArr => {
       return acc;
     },
     []
-  ),0]
+  );
+return [stageCleared,rowsCleared]
 };
