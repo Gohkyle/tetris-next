@@ -15,16 +15,17 @@ import { useState, useRef } from "react";
 import { Movement, Shape } from "../types";
 import { checkCollision, createStage, rows } from "../utils/gameHelper";
 import { useInterval } from "../hooks/useInterval";
+import { randomTetromino } from "../tetrominos";
 
 interface IProps {
   keyCode: number;
 }
 
 export const Tetris = () => {
-  const [isGameOver, setIsGameOver] = useState(true);
-  const [player, updatePlayer, resetPlayer, rotatePlayer] = usePlayer();
-  const [stage, setStage] = useStage(player, resetPlayer, setIsGameOver);
-  const [nextBlock, setNextBlock] = useState<Shape[][]>([[0]]);
+  const [isGameOver, setIsGameOver] = useState<boolean>(true);
+  const [nextBlock, setNextBlock] = useState<Shape[][]>(randomTetromino())
+  const [player, updatePlayer, resetPlayer, rotatePlayer] = usePlayer(nextBlock, setNextBlock);
+  const [stage, setStage] = useStage(player, resetPlayer, nextBlock, setIsGameOver);
   const [dropTimer, setDropTimer] = useState<number>(0);
 
   const tetrisBoard = useRef<HTMLDivElement>(null)
@@ -85,7 +86,6 @@ export const Tetris = () => {
     setStage(createStage());
     setDropTimer(1000);
     resetPlayer();
-
   };
 
   useInterval(() => {

@@ -6,9 +6,9 @@ import {
   updatePlayerPos,
 } from "../utils/gameHelper";
 import { randomTetromino } from "../tetrominos";
-import { Movement, Player, SquareObject } from "../types";
+import { Movement, Player, Shape, SquareObject } from "../types";
 
-export const usePlayer = () => {
+export const usePlayer = (nextBlock: Shape[][], setNextBlock: (a:Shape[][]) => void) => {
   const [player, setPlayer] = useState<Player>({
     currTetro: [[0]],
     position: { x: 0, y: 0 },
@@ -47,13 +47,14 @@ export const usePlayer = () => {
   };
 
   const resetPlayer = useCallback(() => {
-    const nextBlock = randomTetromino();
     setPlayer({
       currTetro: nextBlock,
       position: { x: columns / 2 - Math.floor(nextBlock.length / 2), y: 0 },
       hasCollided: false,
     });
-  }, []);
+    setNextBlock(randomTetromino());
+    
+  }, [nextBlock]);
 
   return [player, updatePlayer, resetPlayer, rotatePlayer] as const;
 };
