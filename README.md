@@ -38,6 +38,9 @@ https://www.youtube.com/watch?v=ZGOaCxX8HIU
 - check the movement, updatePlayerpos, updateplayer, fucntions hascollided may be able to be omitted
 - make the viewport more dynamic
 - make press and hold features
+- gameOver can infinitely increase
+- sometimes two tetromino spawn at top
+-
 
 Single 100 × level
 Double 300 × level
