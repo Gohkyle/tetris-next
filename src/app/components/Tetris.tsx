@@ -11,7 +11,7 @@ import { useStage } from "../hooks/useStage";
 import { usePlayer } from "../hooks/usePlayer";
 import{ useStatus } from "../hooks/useStatus"
 
-import { useState, useRef } from "react";
+import { useState, useRef,useEffect} from "react";
 
 import { Movement, Shape } from "../types";
 import { checkCollision, createStage, rows } from "../utils/gameHelper";
@@ -40,12 +40,9 @@ export const Tetris = () => {
     }
   };
   const softDrop = () => {
-    if (totalRows===2){
-      setLevel((prevLevel)=> prevLevel++)
-      setTotalRows(0)
-      setDropTimer((prev)=> prev+=1000)
-    }
     if (!isGameOver){
+   
+
       const movement: Movement = { x: 0, y: 1, hasCollided: false };
       if (!checkCollision(player, stage, movement)) {
         updatePlayer(movement);
@@ -99,6 +96,13 @@ export const Tetris = () => {
   useInterval(() => {
     softDrop();
   }, dropTimer);
+
+useEffect(()=>{
+  setLevel(Math.floor(totalRows/2))
+  setDropTimer(1000*(0.5**level));
+      
+}, [rowsCleared])
+
 
   return (
     <StyledTetris role="button" tabIndex={0} onKeyUp={handleButtonPress} ref={tetrisBoard}>
