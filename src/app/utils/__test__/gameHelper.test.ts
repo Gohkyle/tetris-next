@@ -41,7 +41,7 @@ describe("updateStage()", () => {
       position: { x: 0, y: 0 },
       hasCollided: false,
     };
-    expect(updateStage(prevStage, player)).toBeInstanceOf(Array);
+    expect(updateStage(prevStage, player)[0]).toBeInstanceOf(Array);
   });
   test("updates stage with the player position occupied for nonblank tetromino", () => {
     const prevStage: SquareObject[][] = createStage();
@@ -55,7 +55,7 @@ describe("updateStage()", () => {
     };
 
     expect(
-      updateStage(prevStage, player)[player.position.y][player.position.x]
+      updateStage(prevStage, player)[0][player.position.y][player.position.x]
     ).toEqual({ type: "O", dropped: false });
   });
   test("updates stage with the entire tetromino", () => {
@@ -69,7 +69,7 @@ describe("updateStage()", () => {
       hasCollided: false,
     };
 
-    const updatedStage = updateStage(prevStage, player);
+    const updatedStage = updateStage(prevStage, player)[0];
     expect(updatedStage[0][0]).toEqual({ type: "O", dropped: false });
     expect(updatedStage[0][1]).toEqual({ type: "O", dropped: false });
     expect(updatedStage[1][0]).toEqual({ type: "O", dropped: false });
@@ -86,19 +86,19 @@ describe("updateStage()", () => {
       hasCollided: true,
     };
 
-    expect(updateStage(prevStage, player)[18][0]).toEqual({
+    expect(updateStage(prevStage, player)[0][18][0]).toEqual({
       type: "O",
       dropped: true,
     });
-    expect(updateStage(prevStage, player)[18][1]).toEqual({
+    expect(updateStage(prevStage, player)[0][18][1]).toEqual({
       type: "O",
       dropped: true,
     });
-    expect(updateStage(prevStage, player)[19][0]).toEqual({
+    expect(updateStage(prevStage, player)[0][19][0]).toEqual({
       type: "O",
       dropped: true,
     });
-    expect(updateStage(prevStage, player)[19][1]).toEqual({
+    expect(updateStage(prevStage, player)[0][19][1]).toEqual({
       type: "O",
       dropped: true,
     });
@@ -110,7 +110,7 @@ describe("updateStage()", () => {
       position: { x: 0, y: 0 },
       hasCollided: false,
     };
-    expect(updateStage(prevStage, player)).not.toEqual(prevStage);
+    expect(updateStage(prevStage, player)[0]).not.toEqual(prevStage);
   });
   test("does not mutate original array", () => {
     const prevStage: SquareObject[][] = createStage();
@@ -220,7 +220,7 @@ describe("checkCollision()", () => {
       position: { x: 4, y: 0 },
       hasCollided: false,
     };
-    const stage = updateStage(createStage(), player);
+    const stage = updateStage(createStage(), player)[0];
     const movementR = { x: 1, y: 0 };
     const movementL = { x: -1, y: 0 };
     const movementD = { x: 0, y: 1 };
@@ -239,7 +239,7 @@ describe("checkCollision()", () => {
         position: { x: 9, y: 0 },
         hasCollided: false,
       };
-      const stage = updateStage(createStage(), player);
+      const stage = updateStage(createStage(), player)[0];
       const movement = { x: 1, y: 0 };
 
       expect(checkCollision(player, stage, movement)).toBe(true);
@@ -253,7 +253,7 @@ describe("checkCollision()", () => {
         position: { x: 8, y: 0 },
         hasCollided: false,
       };
-      const stage = updateStage(createStage(), player);
+      const stage = updateStage(createStage(), player)[0];
       const movement = { x: 1, y: 0 };
 
       expect(checkCollision(player, stage, movement)).toBe(true);
@@ -268,7 +268,7 @@ describe("checkCollision()", () => {
         position: { x: 7, y: 0 },
         hasCollided: false,
       };
-      const stage = updateStage(createStage(), player);
+      const stage = updateStage(createStage(), player)[0];
       const movement = { x: 1, y: 0 };
       expect(checkCollision(player, stage, movement)).toBe(false);
     });
@@ -282,7 +282,7 @@ describe("checkCollision()", () => {
         position: { x: 5, y: 0 },
         hasCollided: true,
       };
-      const stage = updateStage(createStage(), player);
+      const stage = updateStage(createStage(), player)[0];
       const movement = { x: 1, y: 0 };
 
       const previousPlayerMovement: Player = {
@@ -293,7 +293,7 @@ describe("checkCollision()", () => {
         position: { x: 7, y: 0 },
         hasCollided: true,
       };
-      const updatedStage = updateStage(stage, previousPlayerMovement);
+      const updatedStage = updateStage(stage, previousPlayerMovement)[0];
 
       expect(checkCollision(player, updatedStage, movement)).toBe(true);
     });
@@ -311,7 +311,7 @@ describe("checkCollision()", () => {
         position: { x: 0, y: 18 },
         hasCollided: false,
       };
-      const stage = updateStage(createStage(), player);
+      const stage = updateStage(createStage(), player)[0];
       const movement = { x: 0, y: 1 };
       expect(checkCollision(player, stage, movement)).toBe(true);
     });
@@ -325,7 +325,7 @@ describe("checkCollision()", () => {
         position: { x: 0, y: 17 },
         hasCollided: false,
       };
-      const stage = updateStage(createStage(), player);
+      const stage = updateStage(createStage(), player)[0];
       const movement = { x: 0, y: 1 };
 
       expect(checkCollision(player, stage, movement)).toBe(false);
@@ -340,7 +340,7 @@ describe("checkCollision()", () => {
         position: { x: 0, y: 4 },
         hasCollided: true,
       };
-      const stage = updateStage(createStage(), player);
+      const stage = updateStage(createStage(), player)[0];
       const movement = { x: 0, y: 1 };
 
       const previousPlayerMovement: Player = {
@@ -351,7 +351,7 @@ describe("checkCollision()", () => {
         position: { x: 0, y: 7 },
         hasCollided: true,
       };
-      const updatedStage = updateStage(stage, previousPlayerMovement);
+      const updatedStage = updateStage(stage, previousPlayerMovement)[0];
 
       expect(checkCollision(player, updatedStage, movement)).toBe(true);
     });
@@ -435,7 +435,7 @@ describe("clearRows()", () => {
       
     ];
 
-    expect(clearRows(mockStage)).toEqual(clearedMockStage)
+    expect(clearRows(mockStage)[0]).toEqual(clearedMockStage)
   });
   test("returns a new array", () => { 
     const mockStage: SquareObject[][] = [

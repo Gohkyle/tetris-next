@@ -6,8 +6,8 @@ export const columns: number = 10;
 export const createStage = () => {
   return new Array(rows).fill(new Array(columns).fill({type:0, dropped: false}));
 };
-
-export const updateStage = (prevStage: SquareObject[][], player: Player) => {
+type stageArr = [SquareObject[][], number]
+export const updateStage = (prevStage: SquareObject[][], player: Player) : stageArr => {
 
   const newStage = prevStage.map((row) => {
     return row.map((square: SquareObject) : SquareObject=> {
@@ -27,7 +27,7 @@ export const updateStage = (prevStage: SquareObject[][], player: Player) => {
   if (player.hasCollided){
     return clearRows(newStage)
   }
-  return newStage;
+  return [newStage, 0];
 };
 
 export const updatePlayerPos = (player: Player, {x, y, hasCollided}:Movement)=> {
@@ -74,8 +74,8 @@ export const rotate = (matrix:Shape[][]) :Shape [][]=> {
   return transposed.map((row:Shape[])=>row.reverse())
 }
 
-export const clearRows = (stage: SquareObject[][]) => {
-  return stage.reduce(
+export const clearRows = (stage: SquareObject[][]):stageArr => {
+  return [stage.reduce(
     (acc: SquareObject[][], row: SquareObject[]): SquareObject[][] => {
       if (row.findIndex((cell) => cell.type === 0) === -1) {
         acc.unshift(new Array(row.length).fill({ type: 0, dropped: false }));
@@ -85,5 +85,5 @@ export const clearRows = (stage: SquareObject[][]) => {
       return acc;
     },
     []
-  );
+  ),0]
 };
