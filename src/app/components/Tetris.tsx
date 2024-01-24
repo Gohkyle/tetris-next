@@ -13,7 +13,7 @@ import { usePlayer } from "../hooks/usePlayer";
 import { useState } from "react";
 
 import { Movement, Shape } from "../types";
-import { checkCollision, createStage } from "../utils/gameHelper";
+import { checkCollision, createStage, rows} from "../utils/gameHelper";
 import { useInterval } from "../hooks/useInterval";
 
 interface IProps {
@@ -29,18 +29,28 @@ export const Tetris = () => {
   // const [isGameOver, setIsGameOver] = useState(false);
 
   const movePlayer = (x: number) => {
-    const movement: Movement = { x, y:0, hasCollided: false };
+    const movement: Movement = { x, y: 0, hasCollided: false };
     if (!checkCollision(player, stage, movement)) {
       updatePlayer(movement);
     }
   };
-   
-  const drop = () =>{
-    const movement: Movement = { x:0, y:1, hasCollided: false }
+
+  const drop = () => {
+    const movement: Movement = { x: 0, y: 1, hasCollided: false };
     if (!checkCollision(player, stage, movement)) {
       updatePlayer(movement);
     } else updatePlayer({ x: 0, y: 0, hasCollided: true });
-  }
+  };
+  const dropPlayer = () => {
+    for (let i = 0; i < rows; i++) {
+      const movement: Movement = { x: 0, y: i, hasCollided: false };
+      if (checkCollision(player, stage, movement)) {
+        updatePlayer({ x: 0, y: i - 1, hasCollided: true });
+        break
+      }
+
+    }
+  };
 
   const handleButtonPress = ({ keyCode }: IProps) => {
     // if(keyCode===27){
@@ -56,12 +66,12 @@ export const Tetris = () => {
       movePlayer(1);
     }
     if (keyCode === 40) {
-      drop()
+      drop();
     }
 
-    // if (keyCode === 32) {
-    //   dropPlayer();
-    // }
+    if (keyCode === 32) {
+      dropPlayer();
+    }
   };
 
   const startGame = () => {
