@@ -14,7 +14,8 @@ export const useStage = (player: Player, resetPlayer: () => void, nextBlock:Shap
 
     if (player.hasCollided) {
       const clonedResetPlayer = JSON.parse(JSON.stringify(player))
-      clonedResetPlayer.position = { x: columns / 2 - Math.floor(nextBlock.length / 2), y: 0 }
+      clonedResetPlayer.currTetro = nextBlock;
+      clonedResetPlayer.position = { x: columns / 2 - Math.floor(nextBlock.length / 2), y: 0 };
 
       if (!checkCollision(clonedResetPlayer, stage, {x:0, y:0})){
         resetPlayer();
